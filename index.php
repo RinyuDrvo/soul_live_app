@@ -42,11 +42,11 @@ foreach ($prepare as $row) {
 
     <tr>
         <td>
-            <?= htmlspechialchars($row['live_name']) ?>
+            <?= htmlspecialchars($row['live_name']) ?>
         </td>
         <td>
             <form method="POST">
-                <button type="submit" name="schedule_choise"></button>
+                <button type="submit" name="schedule_choise">日程選択</button>
                 <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
             </form>
         </td>
