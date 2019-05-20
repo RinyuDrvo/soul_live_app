@@ -31,10 +31,9 @@ $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 //SQL準備
-$sql = 'SELECT * FROM live ORDER BY live_id = :live_id DESC';
+$sql = 'SELECT * FROM live ORDER BY live_id DESC';
 $prepare = $db->prepare($sql);
-//SQLプレースホルダにバインドしてクエリ実行
-$prepare->bindValue(':live_id',$row,PDO::PARAM_INT);
+//クエリ実行
 $prepare->execute();
 
 //ライブ名をひとつずつrowに設定
