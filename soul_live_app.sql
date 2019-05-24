@@ -17,15 +17,15 @@ DESC band;
 
 CREATE TABLE IF NOT EXISTS formation(
     member_id CHAR(7),
-    band_id CHAR(7),
+    band_id CHAR(4),
     PRIMARY KEY(member_id,band_id)
 );
 
-DESC live;
+DESC formation;
 
 CREATE TABLE IF NOT EXISTS member(
-    member_id CHAR(20) PRIMARY KEY,
+    member_id CHAR(7) PRIMARY KEY,
     member_name VARCHAR(20)
 );
 
-DESC schedule;
+DESC member;
