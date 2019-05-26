@@ -57,12 +57,12 @@ foreach ($prepare as $row) {
         </table>
 
         <p>
-            <a href="live_meintenance.php">
+            <a href="live_maintenance.php">
                 ライブメンテナンス
             </a>
         </p>
         <p>
-            <a href="member_meintenance.php">
+            <a href="member_maintenance.php">
                 メンバーメンテナンス
             </a>
         </p>

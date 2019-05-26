@@ -55,13 +55,13 @@ foreach ($prepare as $row) {
         </table>
 
         <p>
-            <a href="live_meintenance.php">
-                ライブメンテナンス
+            <a href="live_insert.php">
+                ライブ追加
             </a>
         </p>
         <p>
-            <a href="member_meintenance.php">
-                メンバーメンテナンス
+            <a href="index.php">
+                戻る
             </a>
         </p>
 
