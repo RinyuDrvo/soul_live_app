@@ -42,8 +42,9 @@ foreach ($prepare as $row) {
             <?= h($row['live_name']) ?>
         </td>
         <td>
-            <form method="POST">
-                <button type="submit" name="live_choice">選択</button>
+            <form method="POST" action="band_maintenance.php">
+                <!-- <button type="submit" name="live_choice">選択</button> -->
+                <a href="band_maintenance.php">選択</a>
                 <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
             </form>
         </td>
