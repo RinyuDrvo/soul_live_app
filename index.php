@@ -8,13 +8,10 @@
         <h1>SoulMatesライブ出演バンド管理アプリβ版</h1>
         <p>ver0.0.0</p>
 
-        <a href="live_meintenane.php">
-            ライブ情報メンテナンス
-        </a>
 
         <h2>ライブ一覧</h2>
         <table>
-            <thead><th>ライブ</th><th>日程選択</th></thead>
+            <thead><th>ライブ</th><th>出演バンド表示</th></thead>
             <tbody>
 
 <?php
@@ -46,7 +43,7 @@ foreach ($prepare as $row) {
         </td>
         <td>
             <form method="POST">
-                <button type="submit" name="schedule_choise">日程選択</button>
+                <button type="submit" name="live_choice">選択</button>
                 <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
             </form>
         </td>
@@ -58,5 +55,17 @@ foreach ($prepare as $row) {
 
             </tbody>
         </table>
+
+        <p>
+            <a href="live_meintenane.php">
+                ライブメンテナンス
+            </a>
+        </p>
+        <p>
+            <a href="live_meintenane.php">
+                メンバーメンテナンス
+            </a>
+        </p>
+
     </body>
 </html>
