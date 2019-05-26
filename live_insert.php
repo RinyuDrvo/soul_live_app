@@ -34,14 +34,13 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>ライブメンテナンス</title>
+        <title>ライブ追加</title>
     </head>
     <body>
-        <h1>ライブメンテナンス</h1>
+        <h1>ライブ追加</h1>
 
-        <h2>ライブ一覧</h2>
         <table>
-            <thead><th>ライブID</th><th>ライブ</th><th></th></thead>
+            <thead><th>ライブ</th><th></th></thead>
             <tbody>
 
 <?php
@@ -57,9 +56,6 @@ foreach ($prepare as $row) {
 ?>
 
     <tr>
-        <td>
-            <!--ライブID表示-->
-            <?= h($row['live_id']) ?>
         <td>
             <!--ライブ名表示-->
             <?= h($row['live_name']) ?>

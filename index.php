@@ -39,7 +39,7 @@ foreach ($prepare as $row) {
 
     <tr>
         <td>
-            <?= htmlspecialchars($row['live_name']) ?>
+            <?= h($row['live_name']) ?>
         </td>
         <td>
             <form method="POST">
