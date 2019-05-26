@@ -52,6 +52,11 @@
             <input type="text" name="live_name" size="30" maxlength="30">
             <p>ライブID</p>
             <input type="text" name="live_id" size="7" maxlength="7"><br>
+            <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
+            <p>※必ず7文字で登録して下さい</p>
+            <p>IDが被るとエラーになり登録できません。</p>
+            <p>前のページIDを確認してから入れてください。</p>
+            <p>半角数字で入力してください</p>
             <button type="submit" name="live_insert">追加</button>
         </form>
 
