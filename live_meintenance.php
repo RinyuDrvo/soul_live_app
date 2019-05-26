@@ -2,16 +2,14 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>SoulMatesライブ出演バンド管理</title>
+        <title>ライブメンテナンス</title>
     </head>
     <body>
-        <h1>SoulMatesライブ出演バンド管理アプリβ版</h1>
-        <p>ver0.0.0</p>
+        <h1>ライブメンテナンス</h1>
 
-
-        <h2>ライブ一覧</h2>
+        <h2>ライブ名</h2>
         <table>
-            <thead><th>ライブ</th><th>出演バンド表示</th></thead>
+            <thead><th>ライブ</th><th></th></thead>
             <tbody>
 
 <?php
