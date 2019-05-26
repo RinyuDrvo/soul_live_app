@@ -39,50 +39,17 @@
     <body>
         <h1>ライブ追加</h1>
 
-        <table>
-            <thead><th>ライブ</th><th></th></thead>
-            <tbody>
-
-<?php
-
-//SQL準備
-$sql = 'SELECT * FROM live ORDER BY live_id';
-$prepare = $db->prepare($sql);
-//クエリ実行
-$prepare->execute();
-
-//ライブ名をひとつずつrowに設定
-foreach ($prepare as $row) {
-?>
-
-    <tr>
-        <td>
-            <!--ライブ名表示-->
-            <?= h($row['live_name']) ?>
-        </td>
-        <td>
-            <!--削除ボタン表示 POSTメソッドでlive_idを削除部分に渡す-->
-            <form method="POST">
-                <button type="submit" name="live_delete">削除</button>
-                <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
-            </form>
-        </td>
-    </tr>
-
-<?php
-}
-?>
-
-            </tbody>
-        </table>
+        <!--ライブ入力フォーム-->
+        <form method="POST">
+            <p>ライブ名</p>
+            <input type="text" name="live_name" size="30" maxlength="30">
+            <p>ライブID</p>
+            <input type="text" name="live_id" size="7" maxlength="7"><br>
+            <button type="submit" name="live_insert">追加</button>
+        </form>
 
         <p>
-            <a href="live_insert.php">
-                ライブ追加
-            </a>
-        </p>
-        <p>
-            <a href="index.php">
+            <a href="live_maintenance.php">
                 戻る
             </a>
         </p>
