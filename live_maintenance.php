@@ -6,20 +6,21 @@
     // //h()関数読み込み
     require_once __DIR__ . '/lib/h.php';
 
-    //DB接続
-    $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
-    $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
     try {
+
+        //DB接続
+        $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
+        $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
         //削除ボタンが押されたら
         if (isset($_POST['live_delete'])) {
-            //削除するtodoのidを取得
+            //削除するlive_idを取得
             $live_id = $_POST['live_id'];
-            //SQL準備(idのレコードを削除)
+            //SQL準備(live_idのレコードを削除)
             $sql = "DELETE FROM live WHERE live_id = :live_id";
             $prepare = $db -> prepare($sql);
-            //idに挿入する変数と型を指定
+            //live_idに挿入する変数と型を指定
             $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
             //クエリ実行
             $prepare -> execute();
