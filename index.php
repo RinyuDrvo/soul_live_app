@@ -44,8 +44,8 @@ foreach ($prepare as $row) {
         <td>
             <form method="POST" action="band_maintenance.php">
                 <!-- <button type="submit" name="live_choice">選択</button> -->
-                <a href="band_maintenance.php">選択</a>
                 <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
+                <input type="submit" value="選択">
             </form>
         </td>
     </tr>

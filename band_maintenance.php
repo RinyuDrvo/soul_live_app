@@ -53,10 +53,12 @@
         //結果をstdClassオブジェクト配列として取得
         $result = $prepare->fetchAll(PDO::FETCH_OBJ);
         //出力
-        echo h("ライブ名：{$result->live_name}");
+        foreach ($result as $row) {
+            echo "<h1>" . h("ライブ名: {$row->live_name}") . "</h1>";
+        }
     }
 ?>
-        <h1>出演バンド一覧</h1>
+        <h2>出演バンド一覧</h2>
         <table>
             <thead><th>出演順番</th><th>バンドID</th><th>バンド名</th><th>メンバー</th><th>スケジュール</th><th></th><th></th><th></th></thead>
             <tbody>
