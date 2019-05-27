@@ -60,7 +60,7 @@
 ?>
         <h2>出演バンド一覧</h2>
         <table>
-            <thead><th>出演順番</th><th>バンドID</th><th>バンド名</th><th>メンバー</th><th>スケジュール</th><th></th><th></th><th></th></thead>
+            <thead><th>出演順番</th><th>バンドID</th><th>バンド名</th><th>メンバー</th><th>スケジュール</th><th></th><th></th><th></th><th></th></thead>
             <tbody>
 
 <?php
