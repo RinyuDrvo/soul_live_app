@@ -68,9 +68,7 @@
 //もしlive_idがPOST送信されてこのページに来たら
 if (isset($_POST['live_id'])) {
     //SQL準備
-    $sql = 'SELECT
-    performance_num,band_id,band_name,performance_time
-    from band
+    $sql = 'SELECT * from band
         WHERE live_id=:live_id
         ORDER BY performance_num';
     $prepare = $db->prepare($sql);
@@ -81,6 +79,8 @@ if (isset($_POST['live_id'])) {
 
     //ライブ名をひとつずつrowに設定
     foreach ($prepare as $row) {
+        //メンバーSELECT用にバンドIDを変数に設定
+        $band_id = $row['band_id'];
 ?>
 
     <tr>
@@ -97,7 +97,28 @@ if (isset($_POST['live_id'])) {
         </td>
         <td>
             <!--メンバー表示-->
-            メンバー
+<?php
+//SQL準備
+$sql = "SELECT
+member.member_name
+FROM member
+    INNER JOIN formation
+        ON member.member_id=formation.member_id
+    INNER JOIN band
+        ON formation.band_id=band.band_id
+WHERE band.live_id=:live_id AND band.band_id=:band_id";
+$prepare = $db->prepare($sql);
+//ライブIDでバインド
+$prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+//バンドIDでバインド
+$prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+//クエリ実行
+$prepare->execute();
+//メンバー名をひとつずつrowに設定
+foreach ($prepare as $row_n) {
+    echo h($row_n['member_name']). " ";
+}
+?>
         </td>
         <td>
             <!--スケジュール表示-->

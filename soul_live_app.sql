@@ -30,18 +30,17 @@
 
 -- DESC member;
 
--- select
---     band.performance_num,band.band_id,band.band_name,member.member_name,band.performance_time
---     from member
---         inner join formation
---             on member.member_id=formation.member_id
---         INNER JOIN band
---             ON formation.band_id=band.band_id
---     WHERE band.live_id='201901A'
---     ORDER BY band.band_id;
-
 SELECT
-    performance_num,band_id,band_name,performance_time
-    from band
-        WHERE live_id='201901A'
-        ORDER BY performance_num;
+    member.member_name
+    FROM member
+        INNER JOIN formation
+            ON member.member_id=formation.member_id
+        INNER JOIN band
+            ON formation.band_id=band.band_id
+    WHERE band.live_id='201901A' AND band.band_id='B001'
+
+-- SELECT
+--     performance_num,band_id,band_name,performance_time
+--     from band
+--         WHERE live_id='201901A'
+--         ORDER BY performance_num;
