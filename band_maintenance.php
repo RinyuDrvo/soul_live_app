@@ -127,22 +127,29 @@ foreach ($prepare as $row_n) {
         <td>
             <!--削除ボタン表示 POSTメソッドでband_idを削除部分に渡す-->
             <form method="POST">
-                <button type="submit" name="band_delete">削除</button>
+                <button type="submit" name="band_delete">バンド削除</button>
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
             </form>
         </td>
         <td>
-            <!--変更ボタン表示 POSTメソッドでband_idを変更画面に渡す-->
+            <!--バンド情報更新ボタン表示 POSTメソッドでband_idを変更画面に渡す-->
             <form method="POST" active="update_band.php">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="submit" value="変更">
+                <input type="submit" value="バンド情報更新">
             </form>
         </td>
         <td>
             <!--バンドメンバー追加ボタン表示 POSTメソッドでband_idを追加画面に渡す-->
-            <form method="POST">
+            <form method="POST" active="insert_member.php">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="submit" value="追加">
+                <input type="submit" value="メンバー追加">
+            </form>
+        </td>
+        <td>
+            <!--バンドメンバー削除（一括）-->
+            <form method="POST">
+                <button type="submit" name="member_delete">メンバー登録削除</button>
+                <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
             </form>
         </td>
     </tr>

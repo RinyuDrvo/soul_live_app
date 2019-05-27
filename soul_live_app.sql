@@ -30,14 +30,14 @@
 
 -- DESC member;
 
-SELECT
-    member.member_name
-    FROM member
-        INNER JOIN formation
-            ON member.member_id=formation.member_id
-        INNER JOIN band
-            ON formation.band_id=band.band_id
-    WHERE band.live_id='201901A' AND band.band_id='B001'
+-- SELECT
+--     member.member_name
+--     FROM member
+--         INNER JOIN formation
+--             ON member.member_id=formation.member_id
+--         INNER JOIN band
+--             ON formation.band_id=band.band_id
+--     WHERE band.live_id='201901A' AND band.band_id='B001'
 
 -- SELECT
 --     performance_num,band_id,band_name,performance_time
