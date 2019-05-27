@@ -65,14 +65,22 @@
 
 <?php
 
-//SQL準備
-$sql = 'SELECT * FROM band ORDER BY band_id';
-$prepare = $db->prepare($sql);
-//クエリ実行
-$prepare->execute();
+//もしlive_idがPOST送信されてこのページに来たら
+if (isset($_POST['live_id'])) {
+    //SQL準備
+    $sql = 'SELECT
+    performance_num,band_id,band_name,performance_time
+    from band
+        WHERE live_id=:live_id
+        ORDER BY performance_num';
+    $prepare = $db->prepare($sql);
+    //バインド
+    $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+    //クエリ実行
+    $prepare->execute();
 
-//ライブ名をひとつずつrowに設定
-foreach ($prepare as $row) {
+    //ライブ名をひとつずつrowに設定
+    foreach ($prepare as $row) {
 ?>
 
     <tr>
@@ -89,7 +97,7 @@ foreach ($prepare as $row) {
         </td>
         <td>
             <!--メンバー表示-->
-            メンバー メンバー メンバー
+            メンバー
         </td>
         <td>
             <!--スケジュール表示-->
@@ -105,20 +113,21 @@ foreach ($prepare as $row) {
         <td>
             <!--変更ボタン表示 POSTメソッドでband_idを変更画面に渡す-->
             <form method="POST" active="update_band.php">
-                <a href="update_band.php">変更</a>
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                <input type="submit" value="変更">
             </form>
         </td>
         <td>
             <!--バンドメンバー追加ボタン表示 POSTメソッドでband_idを追加画面に渡す-->
             <form method="POST">
-                <a href="insert_band_member.php">バンドメンバー</a>
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                <input type="submit" value="追加">
             </form>
         </td>
     </tr>
 
 <?php
+    }
 }
 ?>
 
@@ -127,7 +136,7 @@ foreach ($prepare as $row) {
 
         <p>
             <a href="band_insert.php">
-                ライブ追加
+                バンド追加
             </a>
         </p>
         <p>
