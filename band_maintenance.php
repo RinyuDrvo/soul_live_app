@@ -13,18 +13,28 @@
         $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        // //削除ボタンが押されたら
-        // if (isset($_POST['live_delete'])) {
-        //     //削除するlive_idを取得
-        //     $live_id = $_POST['live_id'];
-        //     //SQL準備(live_idのレコードを削除)
-        //     $sql = "DELETE FROM live WHERE live_id = :live_id";
-        //     $prepare = $db -> prepare($sql);
-        //     //live_idに挿入する変数と型を指定
-        //     $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
-        //     //クエリ実行
-        //     $prepare -> execute();
-        // }
+        //削除ボタンが押されたら
+        if (isset($_POST['band_delete'])) {
+            //削除するband_idを取得
+            $band_id = $_POST['band_id'];
+            //バンドテーブルのband_idのレコードを削除
+            //SQL準備
+            $sql = "DELETE FROM band WHERE band_id = :band_id";
+            $prepare = $db -> prepare($sql);
+            //band_idバインド
+            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+            //クエリ実行
+            $prepare -> execute();
+
+            //フォーメーションテーブルのband_idのレコードを削除
+            //SQL準備
+            $sql = "DELETE FROM formation WHERE band_id = :band_id";
+            $prepare = $db -> prepare($sql);
+            //live_idに挿入する変数と型を指定
+            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+            //クエリ実行
+            $prepare -> execute();
+        }
     } catch (PDOException $e) {
         echo 'エラー発生：' . h($e->getMessage());
     }
@@ -60,7 +70,7 @@
 ?>
         <h2>出演バンド一覧</h2>
         <table>
-            <thead><th>出演順番</th><th>バンドID</th><th>バンド名</th><th>メンバー</th><th>スケジュール</th><th></th><th></th><th></th><th></th></thead>
+            <thead><th>出演順番</th><th>バンドID</th><th>バンド名</th><th>メンバー</th><th>持ち時間</th><th></th><th></th><th></th><th></th></thead>
             <tbody>
 
 <?php
