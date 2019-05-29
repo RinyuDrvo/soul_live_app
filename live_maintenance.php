@@ -15,12 +15,22 @@
 
         //削除ボタンが押されたら
         if (isset($_POST['live_delete'])) {
+            //ライブレコード削除
             //削除するlive_idを取得
             $live_id = $_POST['live_id'];
-            //SQL準備(live_idのレコードを削除)
+            //SQL準備(liveテーブルのlive_idのレコードを削除)
             $sql = "DELETE FROM live WHERE live_id = :live_id";
             $prepare = $db -> prepare($sql);
-            //live_idに挿入する変数と型を指定
+            //live_idバインド
+            $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+            //クエリ実行
+            $prepare -> execute();
+
+            //そのライブのバンドレコード削除
+            //SQL準備(bandテーブルのlive_idのレコードを削除)
+            $sql = "DELETE FROM band WHERE live_id = :live_id";
+            $prepare = $db -> prepare($sql);
+            //live_idバインド
             $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
             //クエリ実行
             $prepare -> execute();
