@@ -40,9 +40,9 @@
     <body>
 <?php
     //もしlive_idがPOST送信されてこのページに来たら
-    if (isset($_POST['live_id'])) {
+    if (isset($_GET['live_id'])) {
         //live_idを取得
-        $live_id = $_POST['live_id'];
+        $live_id = $_GET['live_id'];
         //SQL準備
         $sql = 'SELECT * FROM live WHERE live_id = :live_id';
         $prepare = $db->prepare($sql);
@@ -66,7 +66,7 @@
 <?php
 
 //もしlive_idがPOST送信されてこのページに来たら
-if (isset($_POST['live_id'])) {
+if (isset($_GET['live_id'])) {
     //SQL準備
     $sql = 'SELECT * from band
         WHERE live_id=:live_id
