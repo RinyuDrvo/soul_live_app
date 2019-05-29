@@ -24,6 +24,9 @@
             $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
             //クエリ実行
             $prepare -> execute();
+
+            //結果表示
+            echo "<p>消去成功</p>";
         }
     } catch (PDOException $e) {
         echo 'エラー発生：' . h($e->getMessage());

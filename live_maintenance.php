@@ -18,7 +18,7 @@
             //ライブレコード削除
             //削除するlive_idを取得
             $live_id = $_POST['live_id'];
-            //SQL準備(liveテーブルのlive_idのレコードを削除)
+            //SQL準備
             $sql = "DELETE FROM live WHERE live_id = :live_id";
             $prepare = $db -> prepare($sql);
             //live_idバインド
@@ -27,13 +27,27 @@
             $prepare -> execute();
 
             //そのライブのバンドレコード削除
-            //SQL準備(bandテーブルのlive_idのレコードを削除)
+            //SQL準備
             $sql = "DELETE FROM band WHERE live_id = :live_id";
             $prepare = $db -> prepare($sql);
             //live_idバインド
             $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
             //クエリ実行
             $prepare -> execute();
+
+            //そのライブのformation情報削除
+            //SQL準備
+            $sql = "DELETE FROM formation
+                WHERE band_id IN (SELECT band_id FROM band WHERE live_id = :live_id)";
+            $prepare = $db -> prepare($sql);
+            //live_idバインド
+            $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+            //クエリ実行
+            $prepare -> execute();
+
+            //結果表示
+            echo "<p>消去成功</p>";
+
         }
     } catch (PDOException $e) {
         echo 'エラー発生：' . h($e->getMessage());
