@@ -63,8 +63,12 @@ use soul_live_app
 -- INSERT INTO formation (member_id,band_id) VALUES ('2019002','B001');
 -- INSERT INTO formation (member_id,band_id) VALUES ('2019003','B001');
 -- INSERT INTO formation (member_id,band_id) VALUES ('2019004','B001');
+INSERT INTO formation (member_id,band_id) VALUES ('2019005','B002');
+INSERT INTO formation (member_id,band_id) VALUES ('2019006','B002');
+INSERT INTO formation (member_id,band_id) VALUES ('2019007','B002');
+INSERT INTO formation (member_id,band_id) VALUES ('2019008','B002');
 
--- SELECT * FROM formation;
+SELECT * FROM formation;
 
 -- DELETE FROM formation
 --     WHERE band_id IN (SELECT band_id FROM band WHERE live_id='201901A');

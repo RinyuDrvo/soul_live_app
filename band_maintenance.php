@@ -13,7 +13,7 @@
         $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        //削除ボタンが押されたら
+        //バンド削除ボタンが押されたら
         if (isset($_POST['band_delete'])) {
             //削除するband_idを取得
             $band_id = $_POST['band_id'];
@@ -38,6 +38,21 @@
             //結果表示
             echo "<p>消去成功</p>";
         }
+
+        //メンバー削除ボタンが押されたら
+        if(isset($_POST['member_delete'])){
+            //削除するband_idを取得
+            $band_id = $_POST['band_id'];
+            //formationテーブルのband_idのレコードを削除
+            //SQL準備
+            $sql = "DELETE FROM formation WHERE band_id = :band_id";
+            $prepare = $db -> prepare($sql);
+            //band_idバインド
+            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+            //クエリ実行
+            $prepare -> execute();
+        }
+
     } catch (PDOException $e) {
         echo 'エラー発生：' . h($e->getMessage());
     }
@@ -140,8 +155,8 @@ foreach ($prepare as $row_n) {
         <td>
             <!--削除ボタン表示 POSTメソッドでband_idを削除部分に渡す-->
             <form method="POST">
-                <button type="submit" name="band_delete">バンド削除</button>
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                <input type="submit" name="band_delete" value="バンド削除">
             </form>
         </td>
         <td>
@@ -156,15 +171,15 @@ foreach ($prepare as $row_n) {
             <form method="POST" action="formation.php">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
                 <input type="hidden" name="live_id" value="<?= $live_id ?>">
-                <input type="submit" value="バンドメンバー登録">
+                <input type="submit" value="メンバー登録">
             </form>
         </td>
         <td>
-            <!-- バンドメンバー削除（一括）
+            <!-- バンドメンバー削除（一括） -->
             <form method="POST">
-                <button type="submit" name="member_delete">メンバー登録削除</button>
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-            </form> -->
+                <input type="submit" name="member_delete" value="メンバー削除">
+            </form>
         </td>
     </tr>
 
