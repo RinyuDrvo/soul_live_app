@@ -54,7 +54,7 @@
             <input type="text" name="live_id" size="7" maxlength="7"><br>
             <p>半角英数字7文字で入力してください</p>
             <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
-            <p>ライブIDが被ると登録できません。</p>
+            <p>ライブIDが被ると登録できません</p>
             <p>前のページで他ライブのIDを確認してから入力してください</p>
             <button type="submit" name="live_insert">追加</button>
         </form>

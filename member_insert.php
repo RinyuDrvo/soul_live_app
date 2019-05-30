@@ -52,11 +52,10 @@
             <input type="text" name="member_name" size="20" maxlength="20">
             <p>メンバーID</p>
             <input type="text" name="member_id" size="7" maxlength="7"><br>
+            <p>半角数字7文字で入力してください</p>
             <p>入力例：2019001→(2019年1番目の登録者)</p>
-            <p>※必ず7文字で登録して下さい</p>
-            <p>IDが被るとエラーになり登録できません。</p>
-            <p>前のページIDを確認してから入れてください。</p>
-            <p>半角数字で入力してください</p>
+            <p>メンバーIDが被ると登録できません</p>
+            <p>前のページIDを確認してから入力してください</p>
             <button type="submit" name="member_insert">追加</button>
         </form>
 
