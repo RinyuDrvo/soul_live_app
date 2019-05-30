@@ -13,27 +13,33 @@
         $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        // if (isset($_POST['band_id']) && isset($_POST['member_id'])) {
-
-        //出演バンド一覧からband_idを受け取っていれば
+        //登録するバンドのband_idを受け取っていれば
         if(isset($_POST['band_id'])){
-            //メンバーを追加するバンドのband_idを取得
+            //追加するバンドのlive_idを取得
+            $live_id = $_POST['live_id'];
+            //追加するバンドのband_idを取得
             $band_id = $_POST['band_id'];
-        }
-
-        //バンドメンバー登録するメンバーのmembeer_idを受け取っていれば
-        if(isset($_POST['member_id'])){
-            //メンバーを追加するバンドのband_idを取得
-            $band_id = $_POST['band_id'];
-            //追加するメンバーのmember_idを取得
-            $member_id = $_POST['member_id'];
-            //SQL準備(formationテーブルに加入するband_idと加入者のmember_idを追加)
-            $sql = "INSERT INTO formation (band_id,member_id) VALUES (:band_id,:member_id)";
+            //追加するバンドのband_nameを取得
+            $band_name = $_POST['band_name'];
+            //追加するバンドの出演順を取得
+            $performance_num = $_POST['performance_num'];
+            //追加するバンドの持ち時間を取得
+            $performance_time = $_POST['performance_time'];
+            //SQL準備(bandテーブルに各項目を挿入)
+            $sql = "INSERT INTO band
+            (live_id,band_id,band_name,performance_num,performance_time)
+            VALUES (:live_id,:band_id,:band_name,:performance_num,:performance_time)";
             $prepare = $db -> prepare($sql);
+            //live_idに挿入する変数と型を指定
+            $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
             //band_idに挿入する変数と型を指定
             $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
-            //member_idに挿入する変数と型を指定
-            $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
+            //band_nameに挿入する変数と型を指定
+            $prepare -> bindValue(':band_name',$band_name,PDO::PARAM_STR);
+            //performance_timeに挿入する変数と型を指定
+            $prepare -> bindValue(':performance_time',$performance_time,PDO::PARAM_STR);
+            //performance_numに挿入する変数と型を指定
+            $prepare -> bindValue(':performance_num',$performance_num,PDO::PARAM_INT);
             //クエリ実行
             $prepare -> execute();
 
@@ -67,14 +73,19 @@
 
         <!--バンド入力フォーム-->
         <form method="POST">
+            <p>バンド名</p>
+            <input type="text" name="band_name" size="30" maxlength="30">
+            <p>出演順</p>
+            <input type="text" name="performance_num" size="3">
+            <p>持ち時間</p>
+            <input type="text" name="performance_time" size="20" maxlength="20">
             <p>バンドID</p>
-            <input type="text" name="member_id" size="7" maxlength="7">
+            <input type="text" name="band_id" size="4" maxlength="4">
             <p>半角英数字4文字で入力してください</p>
             <p>入力例：B001→(このライブの登録1番目</p>
             <p>バンドIDが被ると登録出来ません</p>
             <p>前ページから他バンドのIDを確認してから入力してください</p>
             <input type="hidden" name="live_id" value="<?= $live_id ?>">
-            <input type="hidden" name="band_id" value="<?= $band_id ?>">
             <input type="submit" value="登録">
         </form>
 
