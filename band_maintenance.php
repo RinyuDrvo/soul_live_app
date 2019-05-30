@@ -192,9 +192,11 @@ foreach ($prepare as $row_n) {
         </table>
 
         <p>
-            <a href="band_insert.php">
-                バンド追加
-            </a>
+            <!-- バンド追加画面へ(live_idを渡す)-->
+            <form method="POST" action="band_insert.php">
+                <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                <input type="submit" value="バンド追加">
+            </form>
         </p>
         <p>
             <a href="index.php">
