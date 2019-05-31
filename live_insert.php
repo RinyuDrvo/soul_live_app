@@ -32,7 +32,10 @@
             echo '<p>追加完了</p>';
         }
     } catch (PDOException $e) {
-        echo 'エラー発生：' . h($e->getMessage());
+        echo 'データベースエラー発生：' . h($e->getMessage());
+    }
+    catch (Exception $e){
+        echo 'エラー発生' . h($e->getMessage());
     }
 
 ?>

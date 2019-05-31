@@ -1,35 +1,32 @@
 <?php
 
-    // //DB設定読み込み
-    require_once __DIR__ . '/conf/database_conf.php';
+// //DB設定読み込み
+require_once __DIR__ . '/conf/database_conf.php';
 
-    // //h()関数読み込み
-    require_once __DIR__ . '/lib/h.php';
+// //h()関数読み込み
+require_once __DIR__ . '/lib/h.php';
 
-    try {
+try {
 
-        //DB接続
-        $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
-        $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    //DB接続
+    $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
+    $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        //削除ボタンが押されたら
-        if (isset($_POST['member_delete'])) {
-            //削除するmember_idを取得
-            $member_id = $_POST['member_id'];
-            //SQL準備(member_idのレコードを削除)
-            $sql = "DELETE FROM member WHERE member_id = :member_id";
-            $prepare = $db -> prepare($sql);
-            //member_idに挿入する変数と型を指定
-            $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
-            //クエリ実行
-            $prepare -> execute();
+    //削除ボタンが押されたら
+    if (isset($_POST['member_delete'])) {
+        //削除するmember_idを取得
+        $member_id = $_POST['member_id'];
+        //SQL準備(member_idのレコードを削除)
+        $sql = "DELETE FROM member WHERE member_id = :member_id";
+        $prepare = $db -> prepare($sql);
+        //member_idに挿入する変数と型を指定
+        $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare -> execute();
 
-            //結果表示
-            echo "<p>消去成功</p>";
-        }
-    } catch (PDOException $e) {
-        echo 'エラー発生：' . h($e->getMessage());
+        //結果表示
+        echo "<p>消去成功</p>";
     }
 
 ?>
@@ -50,14 +47,14 @@
 
 <?php
 
-//SQL準備
-$sql = 'SELECT * FROM member ORDER BY member_id';
-$prepare = $db->prepare($sql);
-//クエリ実行
-$prepare->execute();
+    //SQL準備
+    $sql = 'SELECT * FROM member ORDER BY member_id';
+    $prepare = $db->prepare($sql);
+    //クエリ実行
+    $prepare->execute();
 
-//メンバー名をひとつずつrowに設定
-foreach ($prepare as $row) {
+    //メンバー名をひとつずつrowに設定
+    foreach ($prepare as $row) {
 ?>
 
     <tr>
@@ -78,6 +75,11 @@ foreach ($prepare as $row) {
     </tr>
 
 <?php
+    }
+} catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生' . h($e->getMessage());
 }
 ?>
 

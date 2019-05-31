@@ -1,55 +1,55 @@
 <?php
 
-    // //DB設定読み込み
-    require_once __DIR__ . '/conf/database_conf.php';
+// //DB設定読み込み
+require_once __DIR__ . '/conf/database_conf.php';
 
-    // //h()関数読み込み
-    require_once __DIR__ . '/lib/h.php';
+// //h()関数読み込み
+require_once __DIR__ . '/lib/h.php';
 
 
-    try {
-        //DB接続
-        $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
-        $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+try {
+    //DB接続
+    $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
+    $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        // if (isset($_POST['band_id']) && isset($_POST['member_id'])) {
+    // if (isset($_POST['band_id']) && isset($_POST['member_id'])) {
 
-        //出演バンド一覧からband_idを受け取っていれば
-        if(isset($_POST['band_id'])){
-            //メンバーを追加するバンドのband_idを取得
-            $band_id = $_POST['band_id'];
-        }
-
-        //バンドメンバー登録するメンバーのmembeer_idを受け取っていれば
-        if(isset($_POST['member_id'])){
-            //メンバーを追加するバンドのband_idを取得
-            $band_id = $_POST['band_id'];
-            //追加するメンバーのmember_idを取得
-            $member_id = $_POST['member_id'];
-            //SQL準備(formationテーブルに加入するband_idと加入者のmember_idを追加)
-            $sql = "INSERT INTO formation (band_id,member_id) VALUES (:band_id,:member_id)";
-            $prepare = $db -> prepare($sql);
-            //band_idに挿入する変数と型を指定
-            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
-            //member_idに挿入する変数と型を指定
-            $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
-            //クエリ実行
-            $prepare -> execute();
-
-            echo '<p>追加完了</p>';
-        }
-
-        //出演バンド一覧からlive_idを受け取っていたら
-        if(isset($_POST['live_id'])){
-            //live_idを取得
-            $live_id = $_POST['live_id'];
-        }
-
-    } catch (PDOException $e) {
-        echo 'エラー発生：' . h($e->getMessage());
+    //出演バンド一覧からband_idを受け取っていれば
+    if(isset($_POST['band_id'])){
+        //メンバーを追加するバンドのband_idを取得
+        $band_id = $_POST['band_id'];
     }
 
+    //バンドメンバー登録するメンバーのmembeer_idを受け取っていれば
+    if(isset($_POST['member_id'])){
+        //メンバーを追加するバンドのband_idを取得
+        $band_id = $_POST['band_id'];
+        //追加するメンバーのmember_idを取得
+        $member_id = $_POST['member_id'];
+        //SQL準備(formationテーブルに加入するband_idと加入者のmember_idを追加)
+        $sql = "INSERT INTO formation (band_id,member_id) VALUES (:band_id,:member_id)";
+        $prepare = $db -> prepare($sql);
+        //band_idに挿入する変数と型を指定
+        $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+        //member_idに挿入する変数と型を指定
+        $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare -> execute();
+
+        echo '<p>追加完了</p>';
+    }
+
+    //出演バンド一覧からlive_idを受け取っていたら
+    if(isset($_POST['live_id'])){
+        //live_idを取得
+        $live_id = $_POST['live_id'];
+    }
+}catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生' . h($e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
