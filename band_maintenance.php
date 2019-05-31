@@ -161,10 +161,11 @@ foreach ($prepare as $row_n) {
         </td>
         <td>
             <!--バンド情報更新ボタン表示 POSTメソッドでband_idを変更画面に渡す-->
-            <!-- <form method="POST" action="update_band.php">
+            <form method="POST" action="update_band.php">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                <input type="hidden" name="live_id" value="<?= $live_id ?>">
                 <input type="submit" value="バンド情報更新">
-            </form> -->
+            </form>
         </td>
         <td>
             <!--バンドメンバー登録ボタン表示 POSTメソッドでband_idを追加画面に渡す-->
