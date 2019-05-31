@@ -1,60 +1,56 @@
 <?php
 
-    // //DB設定読み込み
-    require_once __DIR__ . '/conf/database_conf.php';
+// //DB設定読み込み
+require_once __DIR__ . '/conf/database_conf.php';
 
-    // //h()関数読み込み
-    require_once __DIR__ . '/lib/h.php';
+// //h()関数読み込み
+require_once __DIR__ . '/lib/h.php';
 
-    //例外処理
-    try {
-        //DB接続
-        $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
-        $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+//例外処理
+try {
+    //DB接続
+    $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
+    $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        //バンド削除ボタンが押されたら
-        if (isset($_POST['band_delete'])) {
-            //削除するband_idを取得
-            $band_id = $_POST['band_id'];
-            //バンドテーブルのband_idのレコードを削除
-            //SQL準備
-            $sql = "DELETE FROM band WHERE band_id = :band_id";
-            $prepare = $db -> prepare($sql);
-            //band_idバインド
-            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
-            //クエリ実行
-            $prepare -> execute();
+    //バンド削除ボタンが押されたら
+    if (isset($_POST['band_delete'])) {
+        //削除するband_idを取得
+        $band_id = $_POST['band_id'];
+        //バンドテーブルのband_idのレコードを削除
+        //SQL準備
+        $sql = "DELETE FROM band WHERE band_id = :band_id";
+        $prepare = $db -> prepare($sql);
+        //band_idバインド
+        $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare -> execute();
 
-            //フォーメーションテーブルのband_idのレコードを削除
-            //SQL準備
-            $sql = "DELETE FROM formation WHERE band_id = :band_id";
-            $prepare = $db -> prepare($sql);
-            //live_idに挿入する変数と型を指定
-            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
-            //クエリ実行
-            $prepare -> execute();
+        //フォーメーションテーブルのband_idのレコードを削除
+        //SQL準備
+        $sql = "DELETE FROM formation WHERE band_id = :band_id";
+        $prepare = $db -> prepare($sql);
+        //live_idに挿入する変数と型を指定
+        $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare -> execute();
 
-            //結果表示
-            echo "<p>消去成功</p>";
-        }
+        //結果表示
+        echo "<p>消去成功</p>";
+    }
 
-        //メンバー削除ボタンが押されたら
-        if(isset($_POST['member_delete'])){
-            //削除するband_idを取得
-            $band_id = $_POST['band_id'];
-            //formationテーブルのband_idのレコードを削除
-            //SQL準備
-            $sql = "DELETE FROM formation WHERE band_id = :band_id";
-            $prepare = $db -> prepare($sql);
-            //band_idバインド
-            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
-            //クエリ実行
-            $prepare -> execute();
-        }
-
-    } catch (PDOException $e) {
-        echo 'エラー発生：' . h($e->getMessage());
+    //メンバー削除ボタンが押されたら
+    if(isset($_POST['member_delete'])){
+        //削除するband_idを取得
+        $band_id = $_POST['band_id'];
+        //formationテーブルのband_idのレコードを削除
+        //SQL準備
+        $sql = "DELETE FROM formation WHERE band_id = :band_id";
+        $prepare = $db -> prepare($sql);
+        //band_idバインド
+        $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare -> execute();
     }
 
 ?>
@@ -67,8 +63,6 @@
     </head>
     <body>
 <?php
-//例外処理
-try{
     //もしlive_idがPOST送信されてこのページに来たら
     if (isset($_GET['live_id'])) {
         //live_idを取得
@@ -85,9 +79,6 @@ try{
             echo "<h1>" . h($row['live_name']) . "</h1>";
         }
     }
-// }catch (PDOException $e) {
-//     echo 'エラー発生：' . h($e->getMessage());
-// }
 ?>
         <h2>出演バンド一覧</h2>
         <table>
