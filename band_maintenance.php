@@ -6,8 +6,8 @@
     // //h()関数読み込み
     require_once __DIR__ . '/lib/h.php';
 
+    //例外処理
     try {
-
         //DB接続
         $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
         $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -67,6 +67,8 @@
     </head>
     <body>
 <?php
+//例外処理
+try{
     //もしlive_idがPOST送信されてこのページに来たら
     if (isset($_GET['live_id'])) {
         //live_idを取得
@@ -83,6 +85,9 @@
             echo "<h1>" . h($row['live_name']) . "</h1>";
         }
     }
+// }catch (PDOException $e) {
+//     echo 'エラー発生：' . h($e->getMessage());
+// }
 ?>
         <h2>出演バンド一覧</h2>
         <table>
@@ -91,22 +96,22 @@
 
 <?php
 
-//もしlive_idがPOST送信されてこのページに来たら
-if (isset($_GET['live_id'])) {
-    //SQL準備
-    $sql = 'SELECT * from band
-        WHERE live_id=:live_id
-        ORDER BY performance_num';
-    $prepare = $db->prepare($sql);
-    //バインド
-    $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
-    //クエリ実行
-    $prepare->execute();
+    //もしlive_idがPOST送信されてこのページに来たら
+    if (isset($_GET['live_id'])) {
+        //SQL準備
+        $sql = 'SELECT * from band
+            WHERE live_id=:live_id
+            ORDER BY performance_num';
+        $prepare = $db->prepare($sql);
+        //バインド
+        $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare->execute();
 
-    //ライブ名をひとつずつrowに設定
-    foreach ($prepare as $row) {
-        //メンバーSELECT用にバンドIDを変数に設定
-        $band_id = $row['band_id'];
+        //ライブ名をひとつずつrowに設定
+        foreach ($prepare as $row) {
+            //メンバーSELECT用にバンドIDを変数に設定
+            $band_id = $row['band_id'];
 ?>
 
     <tr>
@@ -124,26 +129,26 @@ if (isset($_GET['live_id'])) {
         <td>
             <!--メンバー表示-->
 <?php
-//SQL準備
-$sql = "SELECT
-member.member_name
-FROM member
-    INNER JOIN formation
-        ON member.member_id=formation.member_id
-    INNER JOIN band
-        ON formation.band_id=band.band_id
-WHERE band.live_id=:live_id AND band.band_id=:band_id";
-$prepare = $db->prepare($sql);
-//ライブIDでバインド
-$prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
-//バンドIDでバインド
-$prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
-//クエリ実行
-$prepare->execute();
-//メンバー名をひとつずつrowに設定
-foreach ($prepare as $row_n) {
-    echo h($row_n['member_name']). " ";
-}
+            //SQL準備
+            $sql = "SELECT
+            member.member_name
+            FROM member
+                INNER JOIN formation
+                    ON member.member_id=formation.member_id
+                INNER JOIN band
+                    ON formation.band_id=band.band_id
+            WHERE band.live_id=:live_id AND band.band_id=:band_id";
+            $prepare = $db->prepare($sql);
+            //ライブIDでバインド
+            $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+            //バンドIDでバインド
+            $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+            //クエリ実行
+            $prepare->execute();
+            //メンバー名をひとつずつrowに設定
+            foreach ($prepare as $row_n) {
+                echo h($row_n['member_name']). " ";
+            }
 ?>
         </td>
         <td>
@@ -183,7 +188,12 @@ foreach ($prepare as $row_n) {
     </tr>
 
 <?php
+        }
     }
+}catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生' . h($e->getMessage());
 }
 ?>
 
