@@ -78,11 +78,9 @@
         $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
         //クエリ実行
         $prepare->execute();
-        //結果をstdClassオブジェクト配列として取得
-        $result = $prepare->fetchAll(PDO::FETCH_OBJ);
         //出力
-        foreach ($result as $row) {
-            echo "<h1>" . h("ライブ名: {$row->live_name}") . "</h1>";
+        foreach ($prepare as $row) {
+            echo "<h1>" . h($row['live_name']) . "</h1>";
         }
     }
 ?>
