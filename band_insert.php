@@ -51,11 +51,6 @@ try {
         //live_idを取得
         $live_id = $_POST['live_id'];
     }
-}catch (PDOException $e) {
-    echo 'データベースエラー発生：' . h($e->getMessage());
-}catch (Exception $e){
-    echo 'エラー発生' . h($e->getMessage());
-}
 
 ?>
 
@@ -66,7 +61,30 @@ try {
         <title>バンド登録</title>
     </head>
     <body>
-        <h1>バンド登録</h1>
+<?php
+    //もしlive_idがPOST送信されてこのページに来たら
+    if (isset($_POST['live_id'])) {
+        //live_idを取得
+        $live_id = $_POST['live_id'];
+        //SQL準備
+        $sql = 'SELECT * FROM live WHERE live_id = :live_id';
+        $prepare = $db->prepare($sql);
+        //バインド
+        $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare->execute();
+        //出力
+        foreach ($prepare as $row) {
+            echo "<h1>" . h($row['live_name']) . "</h1>";
+        }
+    }
+}catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生' . h($e->getMessage());
+}
+?>
+        <h2>バンド登録</h2>
 
         <!--バンド入力フォーム-->
         <form method="POST">

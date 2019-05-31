@@ -1,41 +1,41 @@
 <?php
 
-    // //DB設定読み込み
-    require_once __DIR__ . '/conf/database_conf.php';
+// //DB設定読み込み
+require_once __DIR__ . '/conf/database_conf.php';
 
-    // //h()関数読み込み
-    require_once __DIR__ . '/lib/h.php';
+// //h()関数読み込み
+require_once __DIR__ . '/lib/h.php';
 
 
-    try {
-        //DB接続
-        $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
-        $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+try {
+    //DB接続
+    $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
+    $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        //追加ボタンが押されたら
-        if (isset($_POST['member_insert'])) {
-            //追加するメンバーの名前を取得
-            $member_name = $_POST['member_name'];
-            //追加するメンバーのIDを取得
-            $member_id = $_POST['member_id'];
-            //SQL準備(新規メンバーIDと名前をmemberテーブルに追加)
-            $sql = "INSERT INTO member (member_id,member_name) VALUES (:member_id,:member_name)";
-            $prepare = $db -> prepare($sql);
-            //member_idに挿入する変数と型を指定
-            $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
-            //member_nameに挿入する変数と型を指定
-            $prepare -> bindValue(':member_name',$member_name,PDO::PARAM_STR);
-            //クエリ実行
-            $prepare -> execute();
+    //追加ボタンが押されたら
+    if (isset($_POST['member_insert'])) {
+        //追加するメンバーの名前を取得
+        $member_name = $_POST['member_name'];
+        //追加するメンバーのIDを取得
+        $member_id = $_POST['member_id'];
+        //SQL準備(新規メンバーIDと名前をmemberテーブルに追加)
+        $sql = "INSERT INTO member (member_id,member_name) VALUES (:member_id,:member_name)";
+        $prepare = $db -> prepare($sql);
+        //member_idに挿入する変数と型を指定
+        $prepare -> bindValue(':member_id',$member_id,PDO::PARAM_STR);
+        //member_nameに挿入する変数と型を指定
+        $prepare -> bindValue(':member_name',$member_name,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare -> execute();
 
-            echo '<p>追加完了</p>';
-        }
-    } catch (PDOException $e) {
-        echo 'データベースエラー発生：' . h($e->getMessage());
-    }catch (Exception $e){
-        echo 'エラー発生' . h($e->getMessage());
+        echo '<p>追加完了</p>';
     }
+} catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生' . h($e->getMessage());
+}
 
 ?>
 

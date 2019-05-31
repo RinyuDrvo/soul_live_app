@@ -45,11 +45,6 @@ try {
         //live_idを取得
         $live_id = $_POST['live_id'];
     }
-}catch (PDOException $e) {
-    echo 'データベースエラー発生：' . h($e->getMessage());
-}catch (Exception $e){
-    echo 'エラー発生' . h($e->getMessage());
-}
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +54,37 @@ try {
         <title>バンドメンバー登録</title>
     </head>
     <body>
-        <h1>バンドメンバー登録</h1>
+<?php
+    //もしlive_idがPOST送信されてこのページに来たら
+    if (isset($_POST['live_id'])) {
+        //live_idを取得
+        $live_id = $_POST['live_id'];
+        //band_idを取得
+        $band_id = $_POST['band_id'];
+        //SQL準備
+        $sql = 'SELECT band_name,live_name FROM live
+            INNER JOIN band ON live.live_id=band.live_id
+        WHERE live.live_id = :live_id AND band.band_id=:band_id';
+        $prepare = $db->prepare($sql);
+        //live_idバインド
+        $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+        //band_idバインド
+        $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare->execute();
+        //出力
+        foreach ($prepare as $row) {
+            echo "<h1>" . h($row['live_name']) . "</h1>";
+            echo "<h2>" . h($row['band_name']) . "</h2>";
+        }
+    }
+}catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生' . h($e->getMessage());
+}
+?>
+        <h3>バンドメンバー登録</h3>
 
         <!--メンバー入力フォーム-->
         <form method="POST">

@@ -36,7 +36,7 @@ try {
         $prepare -> execute();
 
         //結果表示
-        echo "<p>消去成功</p>";
+        echo "<p>バンド消去成功</p>";
     }
 
     //メンバー削除ボタンが押されたら
@@ -51,6 +51,9 @@ try {
         $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
         //クエリ実行
         $prepare -> execute();
+
+        //結果表示
+        echo "<p>メンバー消去成功</p>";
     }
 
 ?>
@@ -63,7 +66,7 @@ try {
     </head>
     <body>
 <?php
-    //もしlive_idがPOST送信されてこのページに来たら
+    //もしlive_idがGET送信されてこのページに来たら
     if (isset($_GET['live_id'])) {
         //live_idを取得
         $live_id = $_GET['live_id'];
