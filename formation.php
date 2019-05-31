@@ -50,10 +50,6 @@
         echo 'エラー発生：' . h($e->getMessage());
     }
 
-    //テスト用
-    // echo "live_id:".$live_id."<br>";
-    // echo "band_id:".$band_id."<br>";
-    // echo "member_id:".$member_id."<br>";
 ?>
 
 <!DOCTYPE html>

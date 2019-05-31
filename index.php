@@ -43,7 +43,6 @@ foreach ($prepare as $row) {
         </td>
         <td>
             <form method="GET" action="band_maintenance.php">
-                <!-- <button type="submit" name="live_choice">選択</button> -->
                 <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
                 <input type="submit" value="選択">
             </form>
