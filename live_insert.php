@@ -7,7 +7,7 @@ require_once __DIR__ . '/conf/database_conf.php';
 require_once __DIR__ . '/lib/h.php';
 
 //validation() 関数読み込み
-// require_once __DIR__ . '';
+require_once __DIR__ . '/lib/validation.php';
 
 try {
     //DB接続
@@ -43,24 +43,6 @@ try {
 }
 catch (Exception $e){
     echo 'その他エラー発生:' . h($e->getMessage());
-}
-
-//汎用バリデーション関数
-//第一引数:バリデーション対象のデータ(char) 第二引数:データの名前(char) 第3引数:文字列の長さ(int)
-function validation($data,$data_name,$data_len){
-    //汎用バリデーション
-    if(!isset($data) || !is_string($data) || $data === ''){
-        //エラーをExceptionクラスに投げる
-        throw new Exception($data_name . 'が不正な値です');
-    }
-    //データの文字数が指定されていれば
-    if($data_len !== ''){
-        //文字数バリデーション
-        if(strlen($data) !== $data_len){
-            //エラーをErrorExceptionクラスに投げる
-            throw new Exception($data_name . 'の長さが不正です');
-        }
-    }
 }
 ?>
 
