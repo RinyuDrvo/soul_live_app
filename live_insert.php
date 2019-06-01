@@ -1,55 +1,67 @@
 <?php
 
-    // //DB設定読み込み
-    require_once __DIR__ . '/conf/database_conf.php';
+//DB設定読み込み
+require_once __DIR__ . '/conf/database_conf.php';
 
-    // //h()関数読み込み
-    require_once __DIR__ . '/lib/h.php';
+//h()関数読み込み
+require_once __DIR__ . '/lib/h.php';
 
+//validation() 関数読み込み
+// require_once __DIR__ . '';
 
-    try {
-        //DB接続
-        $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
-        $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+try {
+    //DB接続
+    $db = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8","$dbUser","$dbPass");
+    $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-        //追加ボタンが押されたら
-        if (isset($_POST['live_insert'])) {
-            //live_nameバリデーション
-            if(!isset($_POST['live_name']) || !is_string($_POST['live_name']) || $_POST['live_name'] === ''){
-                //エラーをExceptionクラスに投げる
-                throw new Exception('live_nameが不正な値です');
-            }else{
-                //追加するライブ名を取得
-                $live_name = $_POST['live_name'];
-            }
-            //live_idバリデーション
-            if(!isset($_POST['live_id']) || !is_string($_POST['live_id']) || strlen($_POST['live_id']) !== 7){
-                //エラーをErrorExceptionクラスに投げる
-                throw new Exception('live_idが不正な値です');
-            }else{
-                //追加するライブIDを取得
-                $live_id = $_POST['live_id'];
-            }
-            //SQL準備(新規ライブIDとライブ名をliveテーブルに追加)
-            $sql = "INSERT INTO live (live_id,live_name) VALUES (:live_id,:live_name)";
-            $prepare = $db -> prepare($sql);
-            //live_idに挿入する変数と型を指定
-            $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
-            //live_nameに挿入する変数と型を指定
-            $prepare -> bindValue(':live_name',$live_name,PDO::PARAM_STR);
-            //クエリ実行
-            $prepare -> execute();
+    //追加ボタンが押されたら
+    if (isset($_POST['live_insert'])) {
+        //live_nameバリデーション
+        validation($_POST['live_name'],'live_name','');
+        //追加するライブ名を取得
+        $live_name = $_POST['live_name'];
+        //live_idバリデーション
+        validation($_POST['live_id'],'live_id',7);
+        //追加するライブIDを取得
+        $live_id = $_POST['live_id'];
 
-            echo '<p>追加完了</p>';
+        //SQL準備(新規ライブIDとライブ名をliveテーブルに追加)
+        $sql = "INSERT INTO live (live_id,live_name) VALUES (:live_id,:live_name)";
+        $prepare = $db -> prepare($sql);
+        //live_idに挿入する変数と型を指定
+        $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+        //live_nameに挿入する変数と型を指定
+        $prepare -> bindValue(':live_name',$live_name,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare -> execute();
+
+        echo '<p>追加完了</p>';
+    }
+} catch (PDOException $e) {
+    echo 'データベースエラー発生:' . h($e->getMessage());
+}
+catch (Exception $e){
+    echo 'その他エラー発生:' . h($e->getMessage());
+}
+
+//汎用バリデーション関数
+//第一引数:バリデーション対象のデータ(char) 第二引数:データの名前(char) 第3引数:文字列の長さ(int)
+function validation($data,$data_name,$data_len){
+    //汎用バリデーション
+    if(!isset($data) || !is_string($data) || $data === ''){
+        //エラーをExceptionクラスに投げる
+        throw new Exception($data_name . 'が不正な値です');
+    }
+    //データの文字数が指定されていれば
+    if($data_len !== ''){
+        //文字数バリデーション
+        if(strlen($data) !== $data_len){
+            //エラーをErrorExceptionクラスに投げる
+            throw new Exception($data_name . 'の長さが不正です');
         }
-    } catch (PDOException $e) {
-        echo 'データベースエラー発生:' . h($e->getMessage());
     }
-    catch (Exception $e){
-        echo 'その他エラー発生:' . h($e->getMessage());
-    }
-
+}
 ?>
 
 <!DOCTYPE html>
