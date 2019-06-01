@@ -6,6 +6,8 @@ require_once __DIR__ . '/conf/database_conf.php';
 // //h()関数読み込み
 require_once __DIR__ . '/lib/h.php';
 
+//validation() 関数読み込み
+require_once __DIR__ . '/lib/validation.php';
 
 try {
     //DB接続
@@ -27,14 +29,24 @@ try {
 
     //登録するバンドのband_nameを受け取っていれば
     if(isset($_POST['band_name'])){
+        //live_idバリデーション
+        validation($_POST['live_id'],'ライブID',7);
         //追加するバンドのlive_idを取得
         $live_id = $_POST['live_id'];
+        //band_idバリデーション
+        validation($_POST['band_id'],'バンドID',4);
         //追加するバンドのband_idを取得
         $band_id = $_POST['band_id'];
+        //band_nameバリデーション
+        validation($_POST['band_name'],'バンド名','');
         //追加するバンドのband_nameを取得
         $band_name = $_POST['band_name'];
+        //performance_numバリデーション
+        validation($_POST['performance_num'],'出演順','');
         //追加するバンドの出演順を取得
         $performance_num = $_POST['performance_num'];
+        //performance_timeバリデーション
+        validation($_POST['performance_time'],'持ち時間','');
         //追加するバンドの持ち時間を取得
         $performance_time = $_POST['performance_time'];
         //SQL準備(bandテーブルの対象レコードを更新)
@@ -57,11 +69,11 @@ try {
 
         echo '<p>更新完了</p>';
     }
-}catch (PDOException $e) {
-    echo 'データベースエラー発生：' . h($e->getMessage());
-}catch (Exception $e){
-    echo 'エラー発生' . h($e->getMessage());
-}
+// }catch (PDOException $e) {
+//     echo 'データベースエラー発生：' . h($e->getMessage());
+// }catch (Exception $e){
+//     echo 'エラー発生' . h($e->getMessage());
+// }
 
 ?>
 
@@ -72,7 +84,48 @@ try {
         <title>バンド情報更新</title>
     </head>
     <body>
-        <h1>バンド情報更新</h1>
+<?php
+    //もしlive_idがPOST送信されてこのページに来たら
+    if (isset($_POST['live_id'])) {
+        //live_idを取得
+        $live_id = $_POST['live_id'];
+        //band_idを取得
+        $band_id = $_POST['band_id'];
+        //SQL準備
+        $sql = 'SELECT band_name,live_name FROM live
+            INNER JOIN band ON live.live_id=band.live_id
+        WHERE live.live_id = :live_id AND band.band_id=:band_id';
+        $prepare = $db->prepare($sql);
+        //live_idバインド
+        $prepare -> bindValue(':live_id',$live_id,PDO::PARAM_STR);
+        //band_idバインド
+        $prepare -> bindValue(':band_id',$band_id,PDO::PARAM_STR);
+        //クエリ実行
+        $prepare->execute();
+        //出力
+        foreach ($prepare as $row) {
+            echo "<h1>" . h($row['live_name']) . "</h1>";
+            echo "<h2>" . h($row['band_name']) . "</h2>";
+        }
+    }
+}catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生' . h($e->getMessage());
+}finally{
+    //出演バンド一覧からband_idを受け取っていれば
+    if(isset($_POST['band_id'])){
+        //メンバーを追加するバンドのband_idを取得
+        $band_id = $_POST['band_id'];
+    }
+    //出演バンド一覧からlive_idを受け取っていたら
+    if(isset($_POST['live_id'])){
+        //live_idを取得
+        $live_id = $_POST['live_id'];
+    }
+}
+?>
+        <h3>バンド情報更新</h3>
 
         <!--バンド入力フォーム-->
         <form method="POST">
