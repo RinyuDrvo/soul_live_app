@@ -6,6 +6,8 @@ require_once __DIR__ . '/conf/database_conf.php';
 // //h()関数読み込み
 require_once __DIR__ . '/lib/h.php';
 
+//validation() 関数読み込み
+require_once __DIR__ . '/lib/validation.php';
 
 try {
     //DB接続
@@ -13,16 +15,15 @@ try {
     $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    //出演バンド一覧からband_idを受け取っていれば
-    if(isset($_POST['band_id'])){
-        //メンバーを追加するバンドのband_idを取得
-        $band_id = $_POST['band_id'];
-    }
 
     //バンドメンバー登録するメンバーのmembeer_idを受け取っていれば
     if(isset($_POST['member_id'])){
+        //band_idバリデーション
+        validation($_POST['band_id'],'バンドID',4);
         //メンバーを追加するバンドのband_idを取得
         $band_id = $_POST['band_id'];
+        //member_idバリデーション
+        validation($_POST['member_id'],'メンバーID',7);
         //追加するメンバーのmember_idを取得
         $member_id = $_POST['member_id'];
         //SQL準備(formationテーブルに加入するband_idと加入者のmember_idを追加)
@@ -38,11 +39,6 @@ try {
         echo '<p>追加完了</p>';
     }
 
-    //出演バンド一覧からlive_idを受け取っていたら
-    if(isset($_POST['live_id'])){
-        //live_idを取得
-        $live_id = $_POST['live_id'];
-    }
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +76,17 @@ try {
     echo 'データベースエラー発生：' . h($e->getMessage());
 }catch (Exception $e){
     echo 'エラー発生' . h($e->getMessage());
+}finally{
+    //出演バンド一覧からband_idを受け取っていれば
+    if(isset($_POST['band_id'])){
+        //メンバーを追加するバンドのband_idを取得
+        $band_id = $_POST['band_id'];
+    }
+    //出演バンド一覧からlive_idを受け取っていたら
+    if(isset($_POST['live_id'])){
+        //live_idを取得
+        $live_id = $_POST['live_id'];
+    }
 }
 ?>
         <h3>バンドメンバー登録</h3>
