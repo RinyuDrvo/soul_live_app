@@ -15,10 +15,22 @@
 
         //追加ボタンが押されたら
         if (isset($_POST['live_insert'])) {
-            //追加するライブ名を取得
-            $live_name = $_POST['live_name'];
-            //追加するライブIDを取得
-            $live_id = $_POST['live_id'];
+            //live_nameバリデーション
+            if(!isset($_POST['live_name']) || !is_string($_POST['live_name']) || $_POST['live_name'] === ''){
+                //エラーをExceptionクラスに投げる
+                throw new Exception('live_nameが不正な値です');
+            }else{
+                //追加するライブ名を取得
+                $live_name = $_POST['live_name'];
+            }
+            //live_idバリデーション
+            if(!isset($_POST['live_id']) || !is_string($_POST['live_id']) || $_POST['live_id'] === ''){
+                //エラーをErrorExceptionクラスに投げる
+                throw new Exception('live_idが不正な値です');
+            }else{
+                //追加するライブIDを取得
+                $live_id = $_POST['live_id'];
+            }
             //SQL準備(新規ライブIDとライブ名をliveテーブルに追加)
             $sql = "INSERT INTO live (live_id,live_name) VALUES (:live_id,:live_name)";
             $prepare = $db -> prepare($sql);
@@ -35,7 +47,7 @@
         echo 'データベースエラー発生：' . h($e->getMessage());
     }
     catch (Exception $e){
-        echo 'エラー発生' . h($e->getMessage());
+        echo 'その他エラー発生' . h($e->getMessage());
     }
 
 ?>
@@ -59,7 +71,7 @@
             <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
             <p>ライブIDが被ると登録できません</p>
             <p>前のページで他ライブのIDを確認してから入力してください</p>
-            <button type="submit" name="live_insert">追加</button>
+            <input type="submit" name="live_insert" value="追加">
         </form>
 
         <p>

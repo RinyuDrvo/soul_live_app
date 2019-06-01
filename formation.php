@@ -13,8 +13,6 @@ try {
     $db ->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $db ->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    // if (isset($_POST['band_id']) && isset($_POST['member_id'])) {
-
     //出演バンド一覧からband_idを受け取っていれば
     if(isset($_POST['band_id'])){
         //メンバーを追加するバンドのband_idを取得
