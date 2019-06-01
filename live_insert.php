@@ -24,7 +24,7 @@
                 $live_name = $_POST['live_name'];
             }
             //live_idバリデーション
-            if(!isset($_POST['live_id']) || !is_string($_POST['live_id']) || $_POST['live_id'] === ''){
+            if(!isset($_POST['live_id']) || !is_string($_POST['live_id']) || strlen($_POST['live_id']) !== 7){
                 //エラーをErrorExceptionクラスに投げる
                 throw new Exception('live_idが不正な値です');
             }else{
@@ -44,10 +44,10 @@
             echo '<p>追加完了</p>';
         }
     } catch (PDOException $e) {
-        echo 'データベースエラー発生：' . h($e->getMessage());
+        echo 'データベースエラー発生:' . h($e->getMessage());
     }
     catch (Exception $e){
-        echo 'その他エラー発生' . h($e->getMessage());
+        echo 'その他エラー発生:' . h($e->getMessage());
     }
 
 ?>
