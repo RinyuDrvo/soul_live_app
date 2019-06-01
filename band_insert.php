@@ -6,6 +6,8 @@ require_once __DIR__ . '/conf/database_conf.php';
 // //h()関数読み込み
 require_once __DIR__ . '/lib/h.php';
 
+//validation() 関数読み込み
+require_once __DIR__ . '/lib/validation.php';
 
 try {
     //DB接続
@@ -15,16 +17,26 @@ try {
 
     //登録するバンドのband_idを受け取っていれば
     if(isset($_POST['band_id'])){
+        //live_idバリデーション
+        validation($_POST['live_id'],'ライブID',7);
         //追加するバンドのlive_idを取得
         $live_id = $_POST['live_id'];
-        //追加するバンドのband_idを取得
-        $band_id = $_POST['band_id'];
+        //band_nameバリデーション
+        validation($_POST['band_name'],'バンド名','');
         //追加するバンドのband_nameを取得
         $band_name = $_POST['band_name'];
+        //performance_numバリデーション
+        validation($_POST['performance_num'],'出演順','');
         //追加するバンドの出演順を取得
         $performance_num = $_POST['performance_num'];
+        //performance_timeバリデーション
+        validation($_POST['performance_time'],'持ち時間','');
         //追加するバンドの持ち時間を取得
         $performance_time = $_POST['performance_time'];
+        //band_idバリデーション
+        validation($_POST['band_id'],'バンドID',4);
+        //追加するバンドのband_idを取得
+        $band_id = $_POST['band_id'];
         //SQL準備(bandテーブルに各項目を挿入)
         $sql = "INSERT INTO band
         (live_id,band_id,band_name,performance_num,performance_time)
@@ -81,7 +93,7 @@ try {
 }catch (PDOException $e) {
     echo 'データベースエラー発生：' . h($e->getMessage());
 }catch (Exception $e){
-    echo 'エラー発生' . h($e->getMessage());
+    echo 'エラー発生：' . h($e->getMessage());
 }
 ?>
         <h2>バンド登録</h2>
