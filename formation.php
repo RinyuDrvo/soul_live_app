@@ -46,13 +46,23 @@ try {
     <head>
         <meta charset="utf-8">
         <title>バンドメンバー登録</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
+        <main class="wrapper">
+            <section class="container">
 <?php
     //もしlive_idがPOST送信されてこのページに来たら
     if (isset($_POST['live_id'])) {
+        //live_idバリデーション
+        validation($_POST['live_id'],'ライブID',7);
         //live_idを取得
         $live_id = $_POST['live_id'];
+        //band_idバリデーション
+        validation($_POST['band_id'],'バンドID',4);
         //band_idを取得
         $band_id = $_POST['band_id'];
         //SQL準備
@@ -68,7 +78,7 @@ try {
         $prepare->execute();
         //出力
         foreach ($prepare as $row) {
-            echo "<h1>" . h($row['live_name']) . "</h1>";
+            echo "<h3>" . h($row['live_name']) . "</h3>";
             echo "<h2>" . h($row['band_name']) . "</h2>";
         }
     }
@@ -89,22 +99,25 @@ try {
     }
 }
 ?>
-        <h3>バンドメンバー登録</h3>
-
-        <!--メンバー入力フォーム-->
-        <form method="POST">
-            <p>メンバーID</p>
-            <input type="text" name="member_id" size="7" maxlength="7">
-            <p>半角数字で入力してください</p>
-            <input type="hidden" name="live_id" value="<?= $live_id ?>">
-            <input type="hidden" name="band_id" value="<?= $band_id ?>">
-            <input type="submit" value="登録">
-        </form>
-
-        <form method="GET" action="band_maintenance.php">
-            <input type="hidden" name="live_id" value="<?= $live_id ?>">
-            <input type="submit" value="戻る">
-        </form>
-
+                <h1>バンドメンバー登録</h1>
+                <!--メンバー入力フォーム-->
+                <form method="POST">
+                    <fieldset>
+                        <div class="colomn">
+                            <label for="memberId">メンバーID</label>
+                            <input type="text" name="member_id" maxlength="7" placeholder="(例)2019001">
+                            <p>半角数字で入力してください</p>
+                            <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                            <input type="hidden" name="band_id" value="<?= $band_id ?>">
+                            <input type="submit" value="登録">
+                        </div>
+                    </fieldset>
+                </form>
+                <form method="GET" action="band_maintenance.php">
+                    <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                    <input type="submit" value="戻る">
+                </form>
+            </section>
+        </main>
     </body>
 </html>
