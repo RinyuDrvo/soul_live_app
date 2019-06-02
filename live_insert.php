@@ -73,7 +73,7 @@ catch (Exception $e){
                                 <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
                                 <p>ライブIDが被ると登録できません</p>
                                 <p>前のページで他ライブのIDを確認してから入力してください</p>
-                                <input type="submit" name="live_insert" value="追加">
+                                <input type="submit" name="live_insert" value="add">
                             </div>
                         </fieldset>
                     </form>

@@ -50,28 +50,39 @@ try {
     <head>
         <meta charset="utf-8">
         <title>メンバー追加</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
-        <h1>メンバー追加</h1>
-
-        <!--メンバー入力フォーム-->
-        <form method="POST">
-            <p>メンバー名</p>
-            <input type="text" name="member_name" size="20" maxlength="20">
-            <p>メンバーID</p>
-            <input type="text" name="member_id" size="7" maxlength="7"><br>
-            <p>半角数字7文字で入力してください</p>
-            <p>入力例：2019001→(2019年1番目の登録者)</p>
-            <p>メンバーIDが被ると登録できません</p>
-            <p>前のページIDを確認してから入力してください</p>
-            <button type="submit" name="member_insert">追加</button>
-        </form>
-
-        <p>
-            <a href="member_maintenance.php">
-                戻る
-            </a>
-        </p>
-
+        <main class="wrapper">
+            <section class="container">
+                <h1>メンバー追加</h1>
+                <div class="example">
+                    <!--メンバー入力フォーム-->
+                    <form method="POST">
+                        <fieldset>
+                            <div class="colomn">
+                                <p>メンバー名</p>
+                                <input type="text" name="member_name" size="20" maxlength="20">
+                                <p>メンバーID</p>
+                                <input type="text" name="member_id" size="7" maxlength="7"><br>
+                                <p>半角数字7文字で入力してください</p>
+                                <p>入力例：2019001→(2019年1番目の登録者)</p>
+                                <p>メンバーIDが被ると登録できません</p>
+                                <p>前のページIDを確認してから入力してください</p>
+                                <input type="submit" name="member_insert" value="add">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <p>
+                    <a href="member_maintenance.php">
+                        戻る
+                    </a>
+                </p>
+            </section>
+        </main>
     </body>
 </html>
