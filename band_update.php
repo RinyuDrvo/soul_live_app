@@ -76,8 +76,14 @@ try {
     <head>
         <meta charset="utf-8">
         <title>バンド情報更新</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
+        <main class="wrapper">
+            <section class="container">
 <?php
     //もしlive_idがPOST送信されてこのページに来たら
     if (isset($_POST['live_id'])) {
@@ -98,7 +104,7 @@ try {
         $prepare->execute();
         //出力
         foreach ($prepare as $row) {
-            echo "<h1>" . h($row['live_name']) . "</h1>";
+            echo "<h3>" . h($row['live_name']) . "</h3>";
             echo "<h2>" . h($row['band_name']) . "</h2>";
         }
     }
@@ -119,25 +125,28 @@ try {
     }
 }
 ?>
-        <h3>バンド情報更新</h3>
-
-        <!--バンド入力フォーム-->
-        <form method="POST">
-            <p>バンド名</p>
-            <input type="text" name="band_name" size="30" maxlength="30">
-            <p>出演順</p>
-            <input type="text" name="performance_num" size="3">
-            <p>持ち時間</p>
-            <input type="text" name="performance_time" size="20" maxlength="20"><br>
-            <input type="hidden" name="live_id" value="<?= $live_id ?>">
-            <input type="hidden" name="band_id" value="<?= $band_id ?>">
-            <input type="submit" value="更新">
-        </form>
-
-        <form method="GET" action="band_maintenance.php">
-            <input type="hidden" name="live_id" value="<?= $live_id ?>">
-            <input type="submit" value="戻る">
-        </form>
-
+                <h1>バンド情報更新</h1>
+                <!--バンド入力フォーム-->
+                <form method="POST">
+                    <fieldset>
+                        <div class="colomn">
+                            <label for="bandName">バンド名</label>
+                            <input type="text" name="band_name" maxlength="30" placeholder="バンド名">
+                            <label for="performanceNum">出演順</label>
+                            <input type="text" name="performance_num" placeholder="半角数字で1~">
+                            <label for="performanceTime">持ち時間</label>
+                            <input type="text" name="performance_time" maxlength="20" placeholder="(例)13:20~13:40">
+                            <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                            <input type="hidden" name="band_id" value="<?= $band_id ?>">
+                            <input type="submit" value="update">
+                        </div>
+                    </fieldset>
+                </form>
+                <form method="GET" action="band_maintenance.php">
+                    <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                    <input type="submit" value="戻る">
+                </form>
+            </section>
+        </main>
     </body>
 </html>

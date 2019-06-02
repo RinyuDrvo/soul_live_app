@@ -58,7 +58,7 @@ catch (Exception $e){
     </head>
     <body>
         <main class="wrapper">
-            <section class="container" id="forms">
+            <section class="container">
                 <h1 class="titles">ライブ追加</h1>
                 <div class="example">
                     <!--ライブ入力フォーム-->
