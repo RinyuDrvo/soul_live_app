@@ -109,7 +109,7 @@ try {
                             <p>半角数字で入力してください</p>
                             <input type="hidden" name="live_id" value="<?= $live_id ?>">
                             <input type="hidden" name="band_id" value="<?= $band_id ?>">
-                            <input type="submit" value="登録">
+                            <input type="submit" value="add">
                         </div>
                     </fieldset>
                 </form>

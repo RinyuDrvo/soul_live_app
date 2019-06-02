@@ -64,10 +64,10 @@ try {
                     <form method="POST">
                         <fieldset>
                             <div class="colomn">
-                                <p>メンバー名</p>
-                                <input type="text" name="member_name" size="20" maxlength="20">
-                                <p>メンバーID</p>
-                                <input type="text" name="member_id" size="7" maxlength="7"><br>
+                                <label for="memberName">名前</label>
+                                <input type="text" name="member_name" maxlength="20" placeholder="名前">
+                                <label for="memberId">メンバーID</label>
+                                <input type="text" name="member_id" maxlength="7" placeholder="(例)2019001">
                                 <p>半角数字7文字で入力してください</p>
                                 <p>入力例：2019001→(2019年1番目の登録者)</p>
                                 <p>メンバーIDが被ると登録できません</p>
