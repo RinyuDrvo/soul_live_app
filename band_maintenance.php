@@ -64,10 +64,13 @@ try {
         <meta charset="utf-8">
         <title>バンドメンテナンス</title>
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-        <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
+        <main class="wrapper">
+            <section class="container">
 <?php
     //もしlive_idがGET送信されてこのページに来たら
     if (isset($_GET['live_id'])) {
@@ -82,24 +85,25 @@ try {
         $prepare->execute();
         //出力
         foreach ($prepare as $row) {
-            echo "<h1>" . h($row['live_name']) . "</h1>";
+            echo "<h2>" . h($row['live_name']) . "</h2>";
         }
     }
 ?>
-        <h2>出演バンド一覧</h2>
-        <table>
-            <thead>
-                <th>出演順番</th>
-                <th>バンドID</th>
-                <th>バンド名</th>
-                <th>メンバー</th>
-                <th>持ち時間</th>
-                <th>バンド削除</th>
-                <th>バンド情報更新</th>
-                <th>メンバー登録</th>
-                <th>メンバー削除</th>
-            </thead>
-            <tbody>
+                <h1>出演バンド一覧</h1>
+                <div class="example">
+                    <table>
+                        <thead>
+                            <th>出演順番</th>
+                            <th>バンドID</th>
+                            <th>バンド名</th>
+                            <th>メンバー</th>
+                            <th>持ち時間</th>
+                            <th>バンド削除</th>
+                            <th>バンド情報更新</th>
+                            <th>メンバー登録</th>
+                            <th>メンバー削除</th>
+                        </thead>
+                        <tbody>
 
 <?php
 
@@ -121,20 +125,21 @@ try {
             $band_id = $row['band_id'];
 ?>
 
-    <tr>
-        <td>
-            <!--出演順番表示-->
-            <?= h($row['performance_num']) ?>
-        <td>
-            <!--バンドID表示-->
-            <?= h($row['band_id']) ?>
-        </td>
-        <td>
-            <!--バンド名表示-->
-            <?= h($row['band_name']) ?>
-        </td>
-        <td>
-            <!--メンバー表示-->
+                            <tr>
+                                <td>
+                                    <!--出演順番表示-->
+                                    <?= h($row['performance_num']) ?>
+                                <td>
+                                    <!--バンドID表示-->
+                                    <?= h($row['band_id']) ?>
+                                </td>
+                                <td>
+                                    <!--バンド名表示-->
+                                    <?= h($row['band_name']) ?>
+                                </td>
+                                <td>
+
+<!--メンバー表示-->
 <?php
             //SQL準備
             $sql = "SELECT
@@ -154,45 +159,45 @@ try {
             $prepare->execute();
             //メンバー名をひとつずつrowに設定
             foreach ($prepare as $row_n) {
-                echo h($row_n['member_name']). " ";
+                echo h($row_n['member_name']). "/";
             }
 ?>
-        </td>
-        <td>
-            <!--スケジュール表示-->
-            <?= h($row['performance_time']) ?>
-        </td>
-        <td>
-            <!--削除ボタン表示 POSTメソッドでband_idを削除部分に渡す-->
-            <form method="POST">
-                <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="submit" name="band_delete" value="delete">
-            </form>
-        </td>
-        <td>
-            <!--バンド情報更新ボタン表示 POSTメソッドでband_idを変更画面に渡す-->
-            <form method="POST" action="band_update.php">
-                <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="hidden" name="live_id" value="<?= $live_id ?>">
-                <input type="submit" value="update">
-            </form>
-        </td>
-        <td>
-            <!--バンドメンバー登録ボタン表示 POSTメソッドでband_idを追加画面に渡す-->
-            <form method="POST" action="formation.php">
-                <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="hidden" name="live_id" value="<?= $live_id ?>">
-                <input type="submit" value="entry">
-            </form>
-        </td>
-        <td>
-            <!-- バンドメンバー削除（一括） -->
-            <form method="POST">
-                <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="submit" name="member_delete" value="member">
-            </form>
-        </td>
-    </tr>
+                                </td>
+                                <td>
+                                    <!--スケジュール表示-->
+                                    <?= h($row['performance_time']) ?>
+                                </td>
+                                <td>
+                                    <!--削除ボタン表示 POSTメソッドでband_idを削除部分に渡す-->
+                                    <form method="POST">
+                                        <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                                        <input type="submit" name="band_delete" value="delete">
+                                    </form>
+                                </td>
+                                <td>
+                                    <!--バンド情報更新ボタン表示 POSTメソッドでband_idを変更画面に渡す-->
+                                    <form method="POST" action="band_update.php">
+                                        <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                                        <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                                        <input type="submit" value="update">
+                                    </form>
+                                </td>
+                                <td>
+                                    <!--バンドメンバー登録ボタン表示 POSTメソッドでband_idを追加画面に渡す-->
+                                    <form method="POST" action="formation.php">
+                                        <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                                        <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                                        <input type="submit" value="entry">
+                                    </form>
+                                </td>
+                                <td>
+                                    <!-- バンドメンバー削除（一括） -->
+                                    <form method="POST">
+                                        <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
+                                        <input type="submit" name="member_delete" value="member">
+                                    </form>
+                                </td>
+                            </tr>
 
 <?php
         }
@@ -204,21 +209,24 @@ try {
 }
 ?>
 
-            </tbody>
-        </table>
+                        </tbody>
+                    </table>
+                </div>
 
-        <p>
-            <!-- バンド追加画面へ(live_idを渡す)-->
-            <form method="POST" action="band_insert.php">
-                <input type="hidden" name="live_id" value="<?= $live_id ?>">
-                <input type="submit" value="バンド追加">
-            </form>
-        </p>
-        <p>
-            <a href="index.php">
-                戻る
-            </a>
-        </p>
-
+                <p>バンド追加</p>
+                <p>
+                    <!-- バンド追加画面へ(live_idを渡す)-->
+                    <form method="POST" action="band_insert.php">
+                        <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                        <input type="submit" value="add">
+                    </form>
+                </p>
+                <p>
+                    <a href="index.php">
+                        戻る
+                    </a>
+                </p>
+            </section>
+        </main>
     </body>
 </html>
