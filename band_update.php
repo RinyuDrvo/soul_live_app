@@ -69,12 +69,6 @@ try {
 
         echo '<p>更新完了</p>';
     }
-// }catch (PDOException $e) {
-//     echo 'データベースエラー発生：' . h($e->getMessage());
-// }catch (Exception $e){
-//     echo 'エラー発生' . h($e->getMessage());
-// }
-
 ?>
 
 <!DOCTYPE html>
