@@ -51,28 +51,37 @@ catch (Exception $e){
     <head>
         <meta charset="utf-8">
         <title>ライブ追加</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
-        <h1>ライブ追加</h1>
-
-        <!--ライブ入力フォーム-->
-        <form method="POST">
-            <p>ライブ名</p>
-            <input type="text" name="live_name" size="30" maxlength="30">
-            <p>ライブID</p>
-            <input type="text" name="live_id" size="7" maxlength="7"><br>
-            <p>半角英数字7文字で入力してください</p>
-            <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
-            <p>ライブIDが被ると登録できません</p>
-            <p>前のページで他ライブのIDを確認してから入力してください</p>
-            <input type="submit" name="live_insert" value="追加">
-        </form>
-
-        <p>
-            <a href="live_maintenance.php">
-                戻る
-            </a>
-        </p>
-
+        <section class="container" id="forms">
+            <h1 class="titles">ライブ追加</h1>
+            <div class="example">
+                <!--ライブ入力フォーム-->
+                <form method="POST">
+                    <fieldset>
+                        <div class="colomn">
+                            <label for="liveName">ライブ名</label>
+                            <input type="text" name="live_name" maxlength="30" id="liveName" placeholder="ライブ名">
+                            <label for="liveID">ライブID</label>
+                            <input type="text" name="live_id" maxlength="7" id="liveId" placeholder="(例)201901A"><br>
+                            <p>半角英数字7文字で入力してください</p>
+                            <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
+                            <p>ライブIDが被ると登録できません</p>
+                            <p>前のページで他ライブのIDを確認してから入力してください</p>
+                            <input type="submit" name="live_insert" value="追加">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <p>
+                <a href="live_maintenance.php">
+                    戻る
+                </a>
+            </p>
+        </section>
     </body>
 </html>

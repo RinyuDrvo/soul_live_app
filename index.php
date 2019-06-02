@@ -4,18 +4,24 @@
         <meta charset="utf-8">
         <title>SoulMatesライブ出演バンド管理</title>
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-        <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
-        <h1>SoulMatesライブ出演バンド管理アプリβ版</h1>
-        <p>ver0.0.0</p>
+        <main class="wrapper">
+            <section class="container" id="live-list">
+                <h1 class="title">SoulMatesライブ出演バンド管理アプリβ版</h1>
+                <p>ver0.0.0</p>
 
 
-        <h2>ライブ一覧</h2>
-        <table>
-            <thead><th>ライブ</th><th>出演バンド表示</th></thead>
-            <tbody>
+                <h2>ライブ一覧</h2>
+                <table>
+                    <thead>
+                        <th>ライブ</th>
+                        <th>出演バンド表示</th>
+                    </thead>
+                    <tbody>
 
 <?php
 
@@ -43,17 +49,17 @@ try{
     foreach ($prepare as $row) {
 ?>
 
-    <tr>
-        <td>
-            <?= h($row['live_name']) ?>
-        </td>
-        <td>
-            <form method="GET" action="band_maintenance.php">
-                <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
-                <input type="submit" value="選択">
-            </form>
-        </td>
-    </tr>
+            <tr>
+                <td>
+                    <?= h($row['live_name']) ?>
+                </td>
+                <td>
+                    <form method="GET" action="band_maintenance.php">
+                        <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
+                        <input type="submit" value="choice">
+                    </form>
+                </td>
+            </tr>
 
 <?php
     }
@@ -64,19 +70,21 @@ try{
 }
 ?>
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
 
-        <p>
-            <a href="live_maintenance.php">
-                ライブメンテナンス
-            </a>
-        </p>
-        <p>
-            <a href="member_maintenance.php">
-                メンバーメンテナンス
-            </a>
-        </p>
-
+                <p>
+                    <a href="live_maintenance.php">
+                        ライブメンテナンス
+                    </a>
+                </p>
+                <p>
+                    <a href="member_maintenance.php">
+                        メンバーメンテナンス
+                    </a>
+                </p>
+            </section>
+        </main>
+        <script src="https://milligram.github.io/scripts/main.js"></script>
     </body>
 </html>
