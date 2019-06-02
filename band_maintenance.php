@@ -88,7 +88,17 @@ try {
 ?>
         <h2>出演バンド一覧</h2>
         <table>
-            <thead><th>出演順番</th><th>バンドID</th><th>バンド名</th><th>メンバー</th><th>持ち時間</th><th></th><th></th><th></th><th></th></thead>
+            <thead>
+                <th>出演順番</th>
+                <th>バンドID</th>
+                <th>バンド名</th>
+                <th>メンバー</th>
+                <th>持ち時間</th>
+                <th>バンド削除</th>
+                <th>バンド情報更新</th>
+                <th>メンバー登録</th>
+                <th>メンバー削除</th>
+            </thead>
             <tbody>
 
 <?php
@@ -156,7 +166,7 @@ try {
             <!--削除ボタン表示 POSTメソッドでband_idを削除部分に渡す-->
             <form method="POST">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="submit" name="band_delete" value="バンド削除">
+                <input type="submit" name="band_delete" value="delete">
             </form>
         </td>
         <td>
@@ -164,7 +174,7 @@ try {
             <form method="POST" action="band_update.php">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
                 <input type="hidden" name="live_id" value="<?= $live_id ?>">
-                <input type="submit" value="バンド情報更新">
+                <input type="submit" value="update">
             </form>
         </td>
         <td>
@@ -172,14 +182,14 @@ try {
             <form method="POST" action="formation.php">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
                 <input type="hidden" name="live_id" value="<?= $live_id ?>">
-                <input type="submit" value="メンバー登録">
+                <input type="submit" value="entry">
             </form>
         </td>
         <td>
             <!-- バンドメンバー削除（一括） -->
             <form method="POST">
                 <input type="hidden" name="band_id" value="<?= $row['band_id'] ?>">
-                <input type="submit" name="member_delete" value="メンバー削除">
+                <input type="submit" name="member_delete" value="member">
             </form>
         </td>
     </tr>
