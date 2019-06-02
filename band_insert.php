@@ -71,6 +71,9 @@ try {
     <head>
         <meta charset="utf-8">
         <title>バンド登録</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
     </head>
     <body>
 <?php
@@ -100,20 +103,22 @@ try {
 
         <!--バンド入力フォーム-->
         <form method="POST">
-            <p>バンド名</p>
-            <input type="text" name="band_name" size="30" maxlength="30">
-            <p>出演順</p>
-            <input type="text" name="performance_num" size="3">
-            <p>持ち時間</p>
-            <input type="text" name="performance_time" size="20" maxlength="20">
-            <p>バンドID</p>
-            <input type="text" name="band_id" size="4" maxlength="4">
-            <p>半角英数字4文字で入力してください</p>
-            <p>入力例：B001→(このライブの登録1番目</p>
-            <p>バンドIDが被ると登録出来ません</p>
-            <p>前ページから他バンドのIDを確認してから入力してください</p>
-            <input type="hidden" name="live_id" value="<?= $live_id ?>">
-            <input type="submit" value="登録">
+            <fieldset>
+                <label for="nameField">バンド名</label>
+                <input type="text" name="band_name"  maxlength="30" placeholder="バンド名">
+                <label for="performanceNumField">出演順</label>
+                <input type="text" name="performance_num" placeholder="半角数字で1~">
+                <label for="performanceTimeField">持ち時間</label>
+                <input type="text" name="performance_time" maxlength="20" placeholder="(例)13:10~13:30">
+                <label for="bandIdField">バンドID</label>
+                <input type="text" name="band_id" maxlength="4" placeholder="(例)B001">
+                <p>半角英数字4文字で入力してください</p>
+                <p>入力例：B001→(このライブの登録1番目</p>
+                <p>バンドIDが被ると登録出来ません</p>
+                <p>前ページから他バンドのIDを確認してから入力してください</p>
+                <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                <input type="submit" value="登録">
+            </fieldset>
         </form>
 
         <form method="GET" action="band_maintenance.php">

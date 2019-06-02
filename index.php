@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8">
         <title>SoulMatesライブ出演バンド管理</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
     </head>
     <body>
         <h1>SoulMatesライブ出演バンド管理アプリβ版</h1>
