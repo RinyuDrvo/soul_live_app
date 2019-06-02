@@ -57,14 +57,20 @@ try {
     <head>
         <meta charset="utf-8">
         <title>ライブメンテナンス</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
-        <h1>ライブメンテナンス</h1>
-
-        <h2>ライブ一覧</h2>
-        <table>
-            <thead><th>ライブID</th><th>ライブ</th><th></th></thead>
-            <tbody>
+        <main class="wrapper">
+            <section class="container" id="tables">
+                <h2 class="title">ライブメンテナンス</h2>
+                <h1 class="title">ライブ一覧</h1>
+                <div class="example">
+                    <table>
+                        <thead><th>ライブID</th><th>ライブ</th><th></th></thead>
+                        <tbody>
 
 <?php
 
@@ -78,22 +84,22 @@ try {
     foreach ($prepare as $row) {
 ?>
 
-    <tr>
-        <td>
-            <!--ライブID表示-->
-            <?= h($row['live_id']) ?>
-        <td>
-            <!--ライブ名表示-->
-            <?= h($row['live_name']) ?>
-        </td>
-        <td>
-            <!--削除ボタン表示 POSTメソッドでlive_idを削除部分に渡す-->
-            <form method="POST">
-                <button type="submit" name="live_delete">削除</button>
-                <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
-            </form>
-        </td>
-    </tr>
+                            <tr>
+                                <td>
+                                    <!--ライブID表示-->
+                                    <?= h($row['live_id']) ?>
+                                <td>
+                                    <!--ライブ名表示-->
+                                    <?= h($row['live_name']) ?>
+                                </td>
+                                <td>
+                                    <!--削除ボタン表示 POSTメソッドでlive_idを削除部分に渡す-->
+                                    <form method="POST">
+                                        <input type="submit" name="live_delete" value="delete">
+                                        <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
+                                    </form>
+                                </td>
+                            </tr>
 
 <?php
     }
@@ -104,19 +110,20 @@ try {
 }
 ?>
 
-            </tbody>
-        </table>
-
-        <p>
-            <a href="live_insert.php">
-                ライブ追加
-            </a>
-        </p>
-        <p>
-            <a href="index.php">
-                戻る
-            </a>
-        </p>
-
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    <a href="live_insert.php">
+                        ライブ追加
+                    </a>
+                </p>
+                <p>
+                    <a href="index.php">
+                        戻る
+                    </a>
+                </p>
+            </section>
+        </main>
     </body>
 </html>

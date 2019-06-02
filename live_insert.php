@@ -57,31 +57,34 @@ catch (Exception $e){
 		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
-        <section class="container" id="forms">
-            <h1 class="titles">ライブ追加</h1>
-            <div class="example">
-                <!--ライブ入力フォーム-->
-                <form method="POST">
-                    <fieldset>
-                        <div class="colomn">
-                            <label for="liveName">ライブ名</label>
-                            <input type="text" name="live_name" maxlength="30" id="liveName" placeholder="ライブ名">
-                            <label for="liveID">ライブID</label>
-                            <input type="text" name="live_id" maxlength="7" id="liveId" placeholder="(例)201901A"><br>
-                            <p>半角英数字7文字で入力してください</p>
-                            <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
-                            <p>ライブIDが被ると登録できません</p>
-                            <p>前のページで他ライブのIDを確認してから入力してください</p>
-                            <input type="submit" name="live_insert" value="追加">
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <p>
-                <a href="live_maintenance.php">
-                    戻る
-                </a>
-            </p>
-        </section>
+        <main class="wrapper">
+            <section class="container" id="forms">
+                <h1 class="titles">ライブ追加</h1>
+                <div class="example">
+                    <!--ライブ入力フォーム-->
+                    <form method="POST">
+                        <fieldset>
+                            <div class="colomn">
+                                <label for="liveName">ライブ名</label>
+                                <input type="text" name="live_name" maxlength="30" id="liveName" placeholder="ライブ名">
+                                <label for="liveID">ライブID</label>
+                                <input type="text" name="live_id" maxlength="7" id="liveId" placeholder="(例)201901A"><br>
+                                <p>半角英数字7文字で入力してください</p>
+                                <p>入力例：201901A→(2019年1回目のライブのA日程)</p>
+                                <p>ライブIDが被ると登録できません</p>
+                                <p>前のページで他ライブのIDを確認してから入力してください</p>
+                                <input type="submit" name="live_insert" value="追加">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <p>
+                    <a href="live_maintenance.php">
+                        戻る
+                    </a>
+                </p>
+            </section>
+
+        </main>
     </body>
 </html>

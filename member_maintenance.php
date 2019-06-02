@@ -36,14 +36,20 @@ try {
     <head>
         <meta charset="utf-8">
         <title>メンバーメンテナンス</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
-        <h1>メンバーメンテナンス</h1>
+        <main class="wrapper">
+            <section class="container">
+                <h1>メンバーメンテナンス</h1>
 
-        <h2>メンバー一覧</h2>
-        <table>
-            <thead><th>メンバーID</th><th>名前</th><th></th></thead>
-            <tbody>
+                <h2>メンバー一覧</h2>
+                <table>
+                    <thead><th>メンバーID</th><th>名前</th><th></th></thead>
+                    <tbody>
 
 <?php
 
@@ -57,22 +63,22 @@ try {
     foreach ($prepare as $row) {
 ?>
 
-    <tr>
-        <td>
-            <!--メンバーID表示-->
-            <?= h($row['member_id']) ?>
-        <td>
-            <!--名前表示-->
-            <?= h($row['member_name']) ?>
-        </td>
-        <td>
-            <!--追加ボタン表示 POSTメソッドでmember_idを削除部分に渡す-->
-            <form method="POST">
-                <button type="submit" name="member_delete">削除</button>
-                <input type="hidden" name="member_id" value="<?= $row['member_id'] ?>">
-            </form>
-        </td>
-    </tr>
+                        <tr>
+                            <td>
+                                <!--メンバーID表示-->
+                                <?= h($row['member_id']) ?>
+                            <td>
+                                <!--名前表示-->
+                                <?= h($row['member_name']) ?>
+                            </td>
+                            <td>
+                                <!--追加ボタン表示 POSTメソッドでmember_idを削除部分に渡す-->
+                                <form method="POST">
+                                    <input type="submit" name="member_delete" value="delete">
+                                    <input type="hidden" name="member_id" value="<?= $row['member_id'] ?>">
+                                </form>
+                            </td>
+                        </tr>
 
 <?php
     }
@@ -83,19 +89,20 @@ try {
 }
 ?>
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
 
-        <p>
-            <a href="member_insert.php">
-                メンバー追加
-            </a>
-        </p>
-        <p>
-            <a href="index.php">
-                戻る
-            </a>
-        </p>
-
+                <p>
+                    <a href="member_insert.php">
+                        メンバー追加
+                    </a>
+                </p>
+                <p>
+                    <a href="index.php">
+                        戻る
+                    </a>
+                </p>
+            </section>
+        </main>
     </body>
 </html>
