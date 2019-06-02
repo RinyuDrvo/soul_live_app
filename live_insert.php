@@ -18,11 +18,11 @@ try {
     //追加ボタンが押されたら
     if (isset($_POST['live_insert'])) {
         //live_nameバリデーション
-        validation($_POST['live_name'],'live_name','');
+        validation($_POST['live_name'],'ライブ名','');
         //追加するライブ名を取得
         $live_name = $_POST['live_name'];
         //live_idバリデーション
-        validation($_POST['live_id'],'live_id',7);
+        validation($_POST['live_id'],'ライブID',7);
         //追加するライブIDを取得
         $live_id = $_POST['live_id'];
 

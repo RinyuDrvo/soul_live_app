@@ -72,13 +72,18 @@ try {
         <meta charset="utf-8">
         <title>バンド登録</title>
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-        <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
         <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+		<link rel="stylesheet" href="https://milligram.github.io/styles/main.css">
     </head>
     <body>
+        <main class="wrapper">
+            <section class="container">
 <?php
     //もしlive_idがPOST送信されてこのページに来たら
     if (isset($_POST['live_id'])) {
+        //live_ideバリデーション
+        validation($_POST['live_id'],'ライブID',7);
         //live_idを取得
         $live_id = $_POST['live_id'];
         //SQL準備
@@ -99,32 +104,31 @@ try {
     echo 'エラー発生：' . h($e->getMessage());
 }
 ?>
-        <h2>バンド登録</h2>
-
-        <!--バンド入力フォーム-->
-        <form method="POST">
-            <fieldset>
-                <label for="nameField">バンド名</label>
-                <input type="text" name="band_name"  maxlength="30" placeholder="バンド名">
-                <label for="performanceNumField">出演順</label>
-                <input type="text" name="performance_num" placeholder="半角数字で1~">
-                <label for="performanceTimeField">持ち時間</label>
-                <input type="text" name="performance_time" maxlength="20" placeholder="(例)13:10~13:30">
-                <label for="bandIdField">バンドID</label>
-                <input type="text" name="band_id" maxlength="4" placeholder="(例)B001">
-                <p>半角英数字4文字で入力してください</p>
-                <p>入力例：B001→(このライブの登録1番目</p>
-                <p>バンドIDが被ると登録出来ません</p>
-                <p>前ページから他バンドのIDを確認してから入力してください</p>
-                <input type="hidden" name="live_id" value="<?= $live_id ?>">
-                <input type="submit" value="登録">
-            </fieldset>
-        </form>
-
-        <form method="GET" action="band_maintenance.php">
-            <input type="hidden" name="live_id" value="<?= $live_id ?>">
-            <input type="submit" value="戻る">
-        </form>
-
+                <h2>バンド登録</h2>
+                <!--バンド入力フォーム-->
+                <form method="POST">
+                    <fieldset>
+                        <label for="nameField">バンド名</label>
+                        <input type="text" name="band_name"  maxlength="30" placeholder="バンド名">
+                        <label for="performanceNumField">出演順</label>
+                        <input type="text" name="performance_num" placeholder="半角数字で1~">
+                        <label for="performanceTimeField">持ち時間</label>
+                        <input type="text" name="performance_time" maxlength="20" placeholder="(例)13:10~13:30">
+                        <label for="bandIdField">バンドID</label>
+                        <input type="text" name="band_id" maxlength="4" placeholder="(例)B001">
+                        <p>半角英数字4文字で入力してください</p>
+                        <p>入力例：B001→(このライブの登録1番目</p>
+                        <p>バンドIDが被ると登録出来ません</p>
+                        <p>前ページから他バンドのIDを確認してから入力してください</p>
+                        <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                        <input type="submit" value="add">
+                    </fieldset>
+                </form>
+                <form method="GET" action="band_maintenance.php">
+                    <input type="hidden" name="live_id" value="<?= $live_id ?>">
+                    <input type="submit" value="戻る">
+                </form>
+            </section>
+        </main>
     </body>
 </html>
