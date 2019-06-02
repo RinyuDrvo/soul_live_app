@@ -44,12 +44,13 @@ try {
     <body>
         <main class="wrapper">
             <section class="container">
-                <h1>メンバーメンテナンス</h1>
+                <h2>メンバーメンテナンス</h2>
 
-                <h2>メンバー一覧</h2>
-                <table>
-                    <thead><th>メンバーID</th><th>名前</th><th></th></thead>
-                    <tbody>
+                <h1>メンバー一覧</h1>
+                <div class="example">
+                    <table>
+                        <thead><th>メンバーID</th><th>名前</th><th></th></thead>
+                        <tbody>
 
 <?php
 
@@ -63,22 +64,22 @@ try {
     foreach ($prepare as $row) {
 ?>
 
-                        <tr>
-                            <td>
-                                <!--メンバーID表示-->
-                                <?= h($row['member_id']) ?>
-                            <td>
-                                <!--名前表示-->
-                                <?= h($row['member_name']) ?>
-                            </td>
-                            <td>
-                                <!--追加ボタン表示 POSTメソッドでmember_idを削除部分に渡す-->
-                                <form method="POST">
-                                    <input type="submit" name="member_delete" value="delete">
-                                    <input type="hidden" name="member_id" value="<?= $row['member_id'] ?>">
-                                </form>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <!--メンバーID表示-->
+                                    <?= h($row['member_id']) ?>
+                                <td>
+                                    <!--名前表示-->
+                                    <?= h($row['member_name']) ?>
+                                </td>
+                                <td>
+                                    <!--追加ボタン表示 POSTメソッドでmember_idを削除部分に渡す-->
+                                    <form method="POST">
+                                        <input type="submit" name="member_delete" value="delete">
+                                        <input type="hidden" name="member_id" value="<?= $row['member_id'] ?>">
+                                    </form>
+                                </td>
+                            </tr>
 
 <?php
     }
@@ -89,9 +90,9 @@ try {
 }
 ?>
 
-                    </tbody>
-                </table>
-
+                        </tbody>
+                    </table>
+                </div>
                 <p>
                     <a href="member_insert.php">
                         メンバー追加

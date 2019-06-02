@@ -11,17 +11,16 @@
     <body>
         <main class="wrapper">
             <section class="container" id="live-list">
-                <h1 class="title">SoulMatesライブ出演バンド管理アプリβ版</h1>
+                <h2 class="title">SoulMatesライブ出演バンド管理アプリβ版</h2>
                 <p>ver0.0.0</p>
-
-
-                <h2>ライブ一覧</h2>
-                <table>
-                    <thead>
-                        <th>ライブ</th>
-                        <th>出演バンド表示</th>
-                    </thead>
-                    <tbody>
+                <h1>ライブ一覧</h1>
+                <div class="example">
+                    <table>
+                        <thead>
+                            <th>ライブ</th>
+                            <th>出演バンド表示</th>
+                        </thead>
+                        <tbody>
 
 <?php
 
@@ -49,17 +48,17 @@ try{
     foreach ($prepare as $row) {
 ?>
 
-            <tr>
-                <td>
-                    <?= h($row['live_name']) ?>
-                </td>
-                <td>
-                    <form method="GET" action="band_maintenance.php">
-                        <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
-                        <input type="submit" value="choice">
-                    </form>
-                </td>
-            </tr>
+                            <tr>
+                                <td>
+                                    <?= h($row['live_name']) ?>
+                                </td>
+                                <td>
+                                    <form method="GET" action="band_maintenance.php">
+                                        <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
+                                        <input type="submit" value="choice">
+                                    </form>
+                                </td>
+                            </tr>
 
 <?php
     }
@@ -70,9 +69,9 @@ try{
 }
 ?>
 
-                    </tbody>
-                </table>
-
+                        </tbody>
+                    </table>
+                </div>
                 <p>
                     <a href="live_maintenance.php">
                         ライブメンテナンス
