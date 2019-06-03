@@ -63,6 +63,11 @@ try {
         //live_idを取得
         $live_id = $_POST['live_id'];
     }
+}catch (PDOException $e) {
+    echo 'データベースエラー発生：' . h($e->getMessage());
+}catch (Exception $e){
+    echo 'エラー発生：' . h($e->getMessage());
+}
 
 ?>
 
@@ -80,6 +85,7 @@ try {
         <main class="wrapper">
             <section class="container">
 <?php
+try{
     //もしlive_idがPOST送信されてこのページに来たら
     if (isset($_POST['live_id'])) {
         //live_ideバリデーション
