@@ -1,5 +1,5 @@
 #設定用フォルダ
-conf/
+conf/database_conf.php
 
 #製作用SQL
 soul_live_app.sql
