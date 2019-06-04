@@ -1,4 +1,4 @@
-use soul_live_app
+use heroku_42be86436ff4cd8
 -- CREATE TABLE IF NOT EXISTS live(
 --     live_id CHAR(7) PRIMARY KEY,
 --     live_name VARCHAR(30)

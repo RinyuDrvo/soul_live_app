@@ -1,2 +1,5 @@
 #設定用フォルダ
 conf/
+
+#製作用SQL
+./soul_live_app.sql
