@@ -7,13 +7,13 @@
 - バンドごとにメンバーを登録
 - ライブごとに出演バンド、出演順、出演時間、メンバーを表示
 
-#Dependency
+# Dependency
 言語:PHP 7.1.23
 データベース
 開発環境:MySQL 8.0.15
 本番環境:MySQL 5.5.62
 
-#setup
+# setup
 ローカルで動作させるためには
 mysqlサーバ起動後、
 conf/database_confを作成し、
@@ -39,6 +39,7 @@ require_once __DIR__ . '/conf/heroku_database_conf.php';
 
 これらは、本番環境での動作をさせるために消去orコメントアウトされている。
 
+# Usage
 - ライブ確認(index.php)
     - トップページではどんなライブがあるか確認することができます。
     - ライブ名横の選択ボタンを押すと各ライブに出演するバンド一覧へ移動します
@@ -76,3 +77,6 @@ require_once __DIR__ . '/conf/heroku_database_conf.php';
 - バンドメンバー結成(formation.php)
     - バンドメンバーを登録されたメンバーから結成することができます。  
         追加にはメンバーIDが必要となります
+
+# Authors
+RinyuDrvo
