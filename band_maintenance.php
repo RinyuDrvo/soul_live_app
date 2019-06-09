@@ -130,6 +130,7 @@ try {
                                 <td>
                                     <!--出演順番表示-->
                                     <?= h($row['performance_num']) ?>
+                                </td>
                                 <td>
                                     <!--バンドID表示-->
                                     <?= h($row['band_id']) ?>
