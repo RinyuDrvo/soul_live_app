@@ -89,6 +89,7 @@ try {
                                 <td>
                                     <!--ライブID表示-->
                                     <?= h($row['live_id']) ?>
+                                </td>
                                 <td>
                                     <!--ライブ名表示-->
                                     <?= h($row['live_name']) ?>
