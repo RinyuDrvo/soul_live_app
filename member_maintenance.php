@@ -69,6 +69,7 @@ try {
                                 <td>
                                     <!--メンバーID表示-->
                                     <?= h($row['member_id']) ?>
+                                </td>
                                 <td>
                                     <!--名前表示-->
                                     <?= h($row['member_name']) ?>
