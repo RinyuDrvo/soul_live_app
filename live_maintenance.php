@@ -98,7 +98,7 @@ try {
                                     <!--削除ボタン表示 POSTメソッドでlive_idを削除部分に渡す-->
                                     <form method="POST">
                                         <input type="submit" name="live_delete" value="delete">
-                                        <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
+                                        <input type="hidden" name="live_id" value="<?= h($row['live_id']) ?>">
                                     </form>
                                 </td>
                             </tr>

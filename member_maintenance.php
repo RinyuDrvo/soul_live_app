@@ -78,7 +78,7 @@ try {
                                     <!--追加ボタン表示 POSTメソッドでmember_idを削除部分に渡す-->
                                     <form method="POST">
                                         <input type="submit" name="member_delete" value="delete">
-                                        <input type="hidden" name="member_id" value="<?= $row['member_id'] ?>">
+                                        <input type="hidden" name="member_id" value="<?= h($row['member_id']) ?>">
                                     </form>
                                 </td>
                             </tr>

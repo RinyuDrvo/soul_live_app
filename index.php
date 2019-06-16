@@ -55,7 +55,7 @@ try{
                                 </td>
                                 <td>
                                     <form method="GET" action="band_maintenance.php">
-                                        <input type="hidden" name="live_id" value="<?= $row['live_id'] ?>">
+                                        <input type="hidden" name="live_id" value="<?= h($row['live_id']) ?>">
                                         <input type="submit" value="choice">
                                     </form>
                                 </td>
