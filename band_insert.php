@@ -1,6 +1,7 @@
 <?php
 
 // //DB設定読み込み
+
 require_once __DIR__ . '/conf/database_conf.php';
 // require_once __DIR__ . '/conf/heroku_database_conf.php';
 
