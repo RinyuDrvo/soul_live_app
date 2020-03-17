@@ -29,6 +29,7 @@ $dbUser = 'ユーザー名';
 $dbPass = 'パスワード';
 $dbName = 'データベース名';
 ?>
+```
 
 # Usage
 - ライブ確認(index.php)
