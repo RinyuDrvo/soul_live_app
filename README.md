@@ -16,7 +16,7 @@
 # setup
 ローカルで動作させるためには、ブランチをdevelopに切り替えてcloneしてください。
 
-`git -b develop clone https://github.com/RinyuDrvo/soul_live_app.git`
+`git clone -b develop https://github.com/RinyuDrvo/soul_live_app.git`
 
 mysqlサーバ起動後、
 conf/database_confを作成し、
